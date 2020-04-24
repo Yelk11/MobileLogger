@@ -46,11 +46,6 @@ public class LogEntryFragment extends Fragment {
         );
         textView.setLayoutParams(params);
         llMain.addView(textView);
-
-
-
-
-
     }
 
 }
