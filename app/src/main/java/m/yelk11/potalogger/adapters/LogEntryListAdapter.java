@@ -31,7 +31,7 @@ public class LogEntryListAdapter extends RecyclerView.Adapter<LogEntryListAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
-
+ 
         switch(viewType) {
             case VIEW_TYPE_EMPTY_LIST_PLACEHOLDER:
                 view = mInflater.inflate(R.layout.empty_list_item_fragment, parent, false);
