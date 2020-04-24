@@ -15,10 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import m.yelk11.potalogger.R;
+import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
 
 public class LogEntryFragment extends Fragment {
 
-    private LogEntryVM mViewModel;
+    private LogbookVM mViewModel;
 
     public static LogEntryFragment newInstance() {
         return new LogEntryFragment();
@@ -33,7 +34,7 @@ public class LogEntryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(LogEntryVM.class);
+        mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
 
 
         LinearLayout llMain = getView().findViewById(R.id.log_entry_linear_layout);
