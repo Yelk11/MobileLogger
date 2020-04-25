@@ -220,3 +220,4 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.gitignore.io/api/gradle,android,androidstudio
+.gradle/5.6.4/executionHistory/executionHistory.bin
