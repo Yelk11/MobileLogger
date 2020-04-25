@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import m.yelk11.potalogger.models.Logbook;
 
-public class MainVM extends ViewModel {
+public class  MainVM extends ViewModel {
 
 
     private ArrayList<Logbook> logbooks;

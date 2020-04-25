@@ -15,8 +15,23 @@ public class LogbookVM extends ViewModel {
 
     public ArrayList<LogEntry> getLogEntries()
     {
-        return logbook.getLogEntries();
+        return exampleData();
     }
 
+
+
+    public ArrayList<LogEntry> exampleData()
+    {
+        ArrayList<LogEntry> logEntries = new ArrayList<>();
+        logEntries.add(new LogEntry("test"));
+        logEntries.add(new LogEntry("test"));
+        logEntries.add(new LogEntry("test"));
+        logEntries.add(new LogEntry("test"));
+        logEntries.add(new LogEntry("test"));
+        logEntries.add(new LogEntry("test"));
+        logEntries.add(new LogEntry("test"));
+        logEntries.add(new LogEntry("test"));
+        return logEntries;
+    }
 
 }
