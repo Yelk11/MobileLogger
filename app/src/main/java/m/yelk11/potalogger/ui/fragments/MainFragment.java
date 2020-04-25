@@ -24,12 +24,12 @@ import m.yelk11.potalogger.models.Logbook;
 import m.yelk11.potalogger.ui.activities.MainActivity;
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.adapters.MainLogbookListAdapter;
-import m.yelk11.potalogger.ui.viewmodel.MainVM;
+import m.yelk11.potalogger.ui.viewmodel.LibraryVM;
 
 
 public class MainFragment extends Fragment implements MainLogbookListAdapter.ItemClickListener {
 
-    private MainVM mViewModel;
+    private LibraryVM mViewModel;
     private RecyclerView.LayoutManager layoutManager;
     private MainLogbookListAdapter adapter;
     private ArrayList<Logbook> logBookArray;
@@ -49,7 +49,7 @@ public class MainFragment extends Fragment implements MainLogbookListAdapter.Ite
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MainVM.class);
+        mViewModel = ViewModelProviders.of(this).get(LibraryVM.class);
 
 
         FloatingActionButton fab = getView().findViewById(R.id.new_logbook_fab);

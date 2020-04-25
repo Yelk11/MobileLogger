@@ -10,13 +10,13 @@ import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.ui.fragments.LogEntryFragment;
 import m.yelk11.potalogger.ui.fragments.LogEntryListFragment;
 import m.yelk11.potalogger.ui.fragments.MainFragment;
-import m.yelk11.potalogger.ui.viewmodel.MainVM;
+import m.yelk11.potalogger.ui.viewmodel.LibraryVM;
 import m.yelk11.potalogger.ui.fragments.NewLogbookFragment;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private MainVM mainViewModel;
+    private LibraryVM mainViewModel;
     public static String NEW_LOG_BOOK = "NEW_LOG_BOOK";
 
     public enum FragmentEnum{

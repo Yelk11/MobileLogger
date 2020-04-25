@@ -15,12 +15,15 @@ public class LogbookVM extends ViewModel {
 
     public ArrayList<LogEntry> getLogEntries()
     {
-        return exampleData();
+        return exampleLogEntryData();
     }
 
+    public ArrayList<Logbook> getLogbookData()
+    {
+        return exampleLogbookData();
+    }
 
-
-    public ArrayList<LogEntry> exampleData()
+    public ArrayList<LogEntry> exampleLogEntryData()
     {
         ArrayList<LogEntry> logEntries = new ArrayList<>();
         logEntries.add(new LogEntry("test"));
@@ -32,6 +35,20 @@ public class LogbookVM extends ViewModel {
         logEntries.add(new LogEntry("test"));
         logEntries.add(new LogEntry("test"));
         return logEntries;
+    }
+
+    public ArrayList<Logbook> exampleLogbookData()
+    {
+        ArrayList<Logbook> logbooks = new ArrayList<>();
+        logbooks.add(new Logbook("test"));
+        logbooks.add(new Logbook("test"));
+        logbooks.add(new Logbook("test"));
+        logbooks.add(new Logbook("test"));
+        logbooks.add(new Logbook("test"));
+        logbooks.add(new Logbook("test"));
+        logbooks.add(new Logbook("test"));
+        logbooks.add(new Logbook("test"));
+        return logbooks;
     }
 
 }
