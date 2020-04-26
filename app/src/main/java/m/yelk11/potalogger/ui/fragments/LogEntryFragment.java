@@ -37,15 +37,15 @@ public class LogEntryFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
 
 
-        LinearLayout llMain = getView().findViewById(R.id.log_entry_linear_layout);
-        TextView textView = new TextView(getContext());
-        textView.setText("I am added dynamically to the view");
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-        );
-        textView.setLayoutParams(params);
-        llMain.addView(textView);
+//        LinearLayout llMain = getView().findViewById(R.id.log_entry_linear_layout);
+//        TextView textView = new TextView(getContext());
+//        textView.setText("I am added dynamically to the view");
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.MATCH_PARENT,
+//                LinearLayout.LayoutParams.MATCH_PARENT
+//        );
+//        textView.setLayoutParams(params);
+//        llMain.addView(textView);
     }
 
 }

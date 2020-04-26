@@ -15,15 +15,18 @@
         android:id="@+id/emptyTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Click the add button to add a new Logbook entry"
+        android:text="@string/click_the_add_button_to_add_a_new_logbook_entry"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/log_entry_list_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_add"
-        tools:layout_editor_absoluteX="335dp"
-        tools:layout_editor_absoluteY="659dp" />
+        android:focusable="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

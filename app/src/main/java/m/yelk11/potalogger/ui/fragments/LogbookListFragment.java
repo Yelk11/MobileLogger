@@ -46,12 +46,13 @@ public class LogbookListFragment extends Fragment implements LogbookListAdapter.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment, container, false);
+        return inflater.inflate(R.layout.logbook_list_fragment, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         NavController navController = Navigation.findNavController(view);
 
@@ -71,16 +72,17 @@ public class LogbookListFragment extends Fragment implements LogbookListAdapter.
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
 
-        RecyclerView recyclerView = getView().findViewById(R.id.my_recycler_view);
+        RecyclerView recyclerView = getView().findViewById(R.id.logbook_list);
         TextView textView = getView().findViewById(R.id.emptyLogBookListTextView);
 
         logBookArray = mViewModel.getLogbookData();
 
-        if (logBookArray == null)
-        {
+        if (logBookArray == null) {
+
             textView.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.INVISIBLE);
-        }else{
+        } else {
+            //Toast.makeText(getActivity(), "empty", Toast.LENGTH_SHORT).show();
             textView.setVisibility(View.INVISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -88,16 +90,7 @@ public class LogbookListFragment extends Fragment implements LogbookListAdapter.
             adapter.setClickListener(this);
             recyclerView.setAdapter(adapter);
         }
-
-
-
-
-
     }
-
-
-
-
 
     private void updateLogBookArray() {
         this.logBookArray = mViewModel.exampleLogbookData();

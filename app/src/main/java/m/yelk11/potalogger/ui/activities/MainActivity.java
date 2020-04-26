@@ -16,9 +16,6 @@ import m.yelk11.potalogger.ui.fragments.NewLogbookFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private LibraryVM mainViewModel;
-    public static String NEW_LOG_BOOK = "NEW_LOG_BOOK";
-
 
 
     @Override
