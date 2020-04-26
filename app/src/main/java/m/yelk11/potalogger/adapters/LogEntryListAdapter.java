@@ -5,43 +5,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-
 import m.yelk11.potalogger.models.LogEntry;
 import m.yelk11.potalogger.R;
 
 public class LogEntryListAdapter extends RecyclerView.Adapter<LogEntryListAdapter.ViewHolder> {
 
-    private static final int VIEW_TYPE_EMPTY_LIST_PLACEHOLDER = 0;
-    private static final int VIEW_TYPE_OBJECT_VIEW = 1;
+
     private ArrayList<LogEntry> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    // data is passed into the constructor
+
+    /**
+     * data is passed into the constructor
+     * @param context
+     * @param data
+     */
     public LogEntryListAdapter(Context context, ArrayList<LogEntry> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
 
-    // inflates the row layout from xml when needed
+    /**
+     * inflates the row layout from xml when needed
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = null;
-
-        switch(viewType) {
-            case VIEW_TYPE_EMPTY_LIST_PLACEHOLDER:
-                view = mInflater.inflate(R.layout.empty_list_item_fragment, parent, false);
-
-                break;
-            case VIEW_TYPE_OBJECT_VIEW:
-                view = mInflater.inflate(R.layout.logbook_list_fragment, parent, false);
-
-                break;
-        }
+        View view = mInflater.inflate(R.layout.logbook_list_fragment, parent, false);
         return new ViewHolder(view);
     }
 
@@ -67,14 +62,7 @@ public class LogEntryListAdapter extends RecyclerView.Adapter<LogEntryListAdapte
         return mData.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if (mData.isEmpty()) {
-            return VIEW_TYPE_EMPTY_LIST_PLACEHOLDER;
-        } else {
-            return VIEW_TYPE_OBJECT_VIEW;
-        }
-    }
+
 
     /**
      * stores and recycles views as they are scrolled off screen
@@ -119,6 +107,5 @@ public class LogEntryListAdapter extends RecyclerView.Adapter<LogEntryListAdapte
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
-
 
 }

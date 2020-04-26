@@ -14,14 +14,14 @@ import java.util.ArrayList;
 import m.yelk11.potalogger.models.Logbook;
 import m.yelk11.potalogger.R;
 
-public class MainLogbookListAdapter extends RecyclerView.Adapter<MainLogbookListAdapter.ViewHolder> {
+public class LogbookListAdapter extends RecyclerView.Adapter<LogbookListAdapter.ViewHolder> {
 
     private ArrayList<Logbook> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public MainLogbookListAdapter(Context context, ArrayList<Logbook> data) {
+    public LogbookListAdapter(Context context, ArrayList<Logbook> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }

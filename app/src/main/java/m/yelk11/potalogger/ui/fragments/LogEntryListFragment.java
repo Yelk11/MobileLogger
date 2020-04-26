@@ -5,13 +5,21 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
+
+import m.yelk11.potalogger.adapters.LogbookListAdapter;
 import m.yelk11.potalogger.models.LogEntry;
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.adapters.LogEntryListAdapter;
@@ -30,7 +38,25 @@ public class LogEntryListFragment extends Fragment implements LogEntryListAdapte
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.log_entry_fragment, container, false);
+        return inflater.inflate(R.layout.log_entry_list_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        NavController navController = Navigation.findNavController(view);
+
+        FloatingActionButton fab = view.findViewById(R.id.log_entry_list_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                navController.navigate(R.id.action_logEntryListFragment_to_logbookListFragment);
+
+            }
+        });
     }
 
     @Override
@@ -39,17 +65,23 @@ public class LogEntryListFragment extends Fragment implements LogEntryListAdapte
         mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
 
 
-        logEntry = mViewModel.getLogEntries();
+        logEntry = null;//mViewModel.getLogEntries();
 
 
         RecyclerView recyclerView = getView().findViewById(R.id.log_entry_list_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        TextView textView = getView().findViewById(R.id.emptyTextView);
 
 
-        adapter = new LogEntryListAdapter(getActivity(), logEntry);
-        adapter.setClickListener(this);
-
-        recyclerView.setAdapter(adapter);
+        if (logEntry == null)
+        {
+            textView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
+        }else{
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            adapter = new LogEntryListAdapter(getActivity(), logEntry);
+            adapter.setClickListener(this);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
 

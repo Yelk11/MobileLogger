@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/logEntryListFragment">
+    <fragment
+        android:id="@+id/logEntryListFragment"
+        android:name="m.yelk11.potalogger.ui.fragments.LogEntryListFragment"
+        android:label="logbook_list_fragment"
+        tools:layout="@layout/logbook_list_fragment" >
+        <action
+            android:id="@+id/action_logEntryListFragment_to_logbookListFragment"
+            app:destination="@id/logbookListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logbookListFragment"
+        android:name="m.yelk11.potalogger.ui.fragments.LogbookListFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_logbookListFragment_to_newLogbookFragment"
+            app:destination="@id/newLogbookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newLogbookFragment"
+        android:name="m.yelk11.potalogger.ui.fragments.NewLogbookFragment"
+        android:label="NewLogbookFragment" >
+        <action
+            android:id="@+id/action_newLogbookFragment_to_logEntryListFragment"
+            app:destination="@id/logEntryListFragment" />
+    </fragment>
+</navigation>
