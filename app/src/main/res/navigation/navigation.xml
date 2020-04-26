@@ -10,6 +10,9 @@
         android:label="logbook_list_fragment"
         tools:layout="@layout/logbook_list_fragment" >
         <action
+            android:id="@+id/action_logEntryListFragment_to_logEntryFragment"
+            app:destination="@id/logEntryFragment" />
+        <action
             android:id="@+id/action_logEntryListFragment_to_logbookListFragment"
             app:destination="@id/logbookListFragment" />
     </fragment>
@@ -29,6 +32,15 @@
         tools:layout="@layout/new_logbook_fragment">
         <action
             android:id="@+id/action_newLogbookFragment_to_logEntryListFragment"
+            app:destination="@id/logEntryListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logEntryFragment"
+        android:name="m.yelk11.potalogger.ui.fragments.LogEntryFragment"
+        android:label="LogEntryFragment"
+        tools:layout="@layout/log_entry_fragment">
+        <action
+            android:id="@+id/action_logEntryFragment_to_logEntryListFragment"
             app:destination="@id/logEntryListFragment" />
     </fragment>
 </navigation>
