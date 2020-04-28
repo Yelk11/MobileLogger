@@ -1,45 +1,68 @@
 package m.yelk11.potalogger.ui.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.ui.fragments.LogEntryFragment;
-import m.yelk11.potalogger.ui.fragments.LogEntryListFragment;
-import m.yelk11.potalogger.ui.fragments.LogbookListFragment;
-import m.yelk11.potalogger.ui.viewmodel.LibraryVM;
-import m.yelk11.potalogger.ui.fragments.NewLogbookFragment;
+
 
 
 public class MainActivity extends AppCompatActivity {
 
 
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-//        if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.container, LogbookListFragment.newInstance())
-//                    //TODO .addToBackStack("tag")
-//                    .commitNow();
-//        }
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("ham logger");
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController);
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
 
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
 
+        navController.navigateUp();
+        return super.onSupportNavigateUp();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        switch (item.getItemId()){
+            case R.id.settings:
+                navController.navigate(R.id.logbookSettings);
+                break;
+        }
 
-
-
-
+        return super.onOptionsItemSelected(item);
+    }
 }
 
 

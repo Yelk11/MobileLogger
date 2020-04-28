@@ -53,7 +53,7 @@ public class LogEntryListFragment extends Fragment implements LogEntryListAdapte
             @Override
             public void onClick(View view) {
 
-                navController.navigate(R.id.action_logEntryListFragment_to_logbookListFragment);
+                navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment);
 
             }
         });

@@ -24,7 +24,7 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src/main/res', 'src/main/res/layouts/logbook', 'src/main/res/layouts/main'
+                srcDirs 'src/main/res', 'src/main/res/layouts/logbook', 'src/main/res/layouts/main', 'src/main/res/menus'
             }
         }
     }
