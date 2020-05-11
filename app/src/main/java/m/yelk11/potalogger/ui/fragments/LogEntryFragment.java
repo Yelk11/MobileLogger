@@ -30,11 +30,7 @@ public class LogEntryFragment extends Fragment {
 
     private LogbookVM mViewModel;
 
-    private String[] entryTypes ={
-            "power_tx_rx",
-            "grid_squares",
 
-    };
 
     public static LogEntryFragment newInstance() {
         return new LogEntryFragment();
@@ -50,97 +46,6 @@ public class LogEntryFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
-
-
-        LinearLayout linearLayout = getView().findViewById(R.id.log_entry_linear_layout);
-
-
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(getContext());
-
-
-        LinearLayout.LayoutParams singleParam = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        LinearLayout.LayoutParams doubleParam = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        doubleParam.setLayoutDirection(LinearLayout.LAYOUT_DIRECTION_LTR);
-
-
-        // Date and Time
-        Boolean dateAndTime =
-                sharedPreferences.getBoolean("show_date_time", false);
-        if (true) {
-            TextView title = new TextView(getContext());
-            EditText timeAndDate = new EditText(getContext());
-            title.setText("Time and Date");
-            timeAndDate.setText("Enter Date Here");
-
-
-
-
-            linearLayout.addView(title);
-            linearLayout.addView(timeAndDate);
-        }
-        //frequency
-
-        // Callsigns
-
-        //power report
-        Boolean powerReport =
-                sharedPreferences.getBoolean("power_report", false);
-        if (true) {
-            TextView title = new TextView(getContext());
-            EditText powerTx = new EditText(getContext());
-            EditText PowerRx = new EditText(getContext());
-            title.setText("Time and Date");
-            powerTx.setText("Enter Date Here");
-            PowerRx.setText("Enter Date Here");
-
-            powerTx.setLayoutParams(doubleParam);
-            PowerRx.setLayoutParams(doubleParam);
-
-            linearLayout.addView(title);
-            linearLayout.addView(powerTx);
-            linearLayout.addView(PowerRx);
-        }
-        // signal report
-
-        //grid square
-
-        //comments
-
-
-
-
-
-
-
-
-
-
-
-
-//        Boolean showGridsquares =
-//                sharedPreferences.getBoolean("show_gridsquare", false);
-//        if (showGridsquares) {
-//            TextView textView = new TextView(getContext());
-//            EditText editText = new EditText(getContext());
-//
-//
-//            editText.setText("I am added dynamically to the view");
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                    LinearLayout.LayoutParams.MATCH_PARENT,
-//                    LinearLayout.LayoutParams.MATCH_PARENT
-//            );
-//            editText.setLayoutParams(params);
-//            linearLayout.addView(editText);
-//        }
-
-
 
 
 

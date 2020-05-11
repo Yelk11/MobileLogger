@@ -1,54 +1,44 @@
 package m.yelk11.potalogger.ui.viewmodel;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
-import m.yelk11.potalogger.models.LogEntry;
-import m.yelk11.potalogger.models.Logbook;
+import java.util.List;
 
-public class LogbookVM extends ViewModel {
+import m.yelk11.potalogger.dbc.Logbook;
+import m.yelk11.potalogger.dbc.LogbookRepository;
 
-    private Logbook logbook;
+public class LogbookVM extends AndroidViewModel {
 
+    private LogbookRepository repository;
+    private LiveData<List<Logbook>> allLogbooks;
 
-
-    public ArrayList<LogEntry> getLogEntries()
-    {
-        return exampleLogEntryData();
+    public LogbookVM(@NonNull Application application){
+        super(application);
+        repository = new LogbookRepository(application);
+        allLogbooks = repository.getAllLogbooks();
     }
 
-    public ArrayList<Logbook> getLogbookData()
-    {
-        return exampleLogbookData();
+    public void insert(Logbook logbook){
+        repository.insert(logbook);
     }
 
-    public ArrayList<LogEntry> exampleLogEntryData()
-    {
-        ArrayList<LogEntry> logEntries = new ArrayList<>();
-        logEntries.add(new LogEntry("test"));
-        logEntries.add(new LogEntry("test"));
-        logEntries.add(new LogEntry("test"));
-        logEntries.add(new LogEntry("test"));
-        logEntries.add(new LogEntry("test"));
-        logEntries.add(new LogEntry("test"));
-        logEntries.add(new LogEntry("test"));
-        logEntries.add(new LogEntry("test"));
-        return logEntries;
+    public void update(Logbook logbook){
+        repository.update(logbook);
     }
 
-    public ArrayList<Logbook> exampleLogbookData()
-    {
-        ArrayList<Logbook> logbooks = new ArrayList<>();
-        logbooks.add(new Logbook("test"));
-        logbooks.add(new Logbook("test"));
-        logbooks.add(new Logbook("test"));
-        logbooks.add(new Logbook("test"));
-        logbooks.add(new Logbook("test"));
-        logbooks.add(new Logbook("test"));
-        logbooks.add(new Logbook("test"));
-        logbooks.add(new Logbook("test"));
-        return logbooks;
+    public void delete(Logbook logbook){
+        repository.delete(logbook);
     }
 
+    public void deleteAllLogbooks(){
+        repository.deleteAllLogbooks();
+    }
+
+    public LiveData<List<Logbook>> getAllLogbooks(){
+        return allLogbooks;
+    }
 }

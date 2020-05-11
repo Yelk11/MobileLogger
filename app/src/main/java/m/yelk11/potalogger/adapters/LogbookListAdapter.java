@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 
-import m.yelk11.potalogger.models.Logbook;
 import m.yelk11.potalogger.R;
+
 
 public class LogbookListAdapter extends RecyclerView.Adapter<LogbookListAdapter.ViewHolder> {
 

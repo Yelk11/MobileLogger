@@ -19,8 +19,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-import m.yelk11.potalogger.adapters.LogbookListAdapter;
-import m.yelk11.potalogger.models.LogEntry;
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.adapters.LogEntryListAdapter;
 import m.yelk11.potalogger.ui.viewmodel.LogbookVM;

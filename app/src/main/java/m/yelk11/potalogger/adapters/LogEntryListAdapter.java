@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import m.yelk11.potalogger.models.LogEntry;
+
 import m.yelk11.potalogger.R;
 
 public class LogEntryListAdapter extends RecyclerView.Adapter<LogEntryListAdapter.ViewHolder> {
