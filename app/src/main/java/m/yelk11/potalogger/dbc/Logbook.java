@@ -1,5 +1,6 @@
 package m.yelk11.potalogger.dbc;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,16 +11,19 @@ public class Logbook {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @ColumnInfo(name = "logbook_title")
     private String title;
 
-    private String description;
+    @ColumnInfo(name = "date_created")
+    private String dateCreated;
 
-    private int priority;
+    @ColumnInfo(name = "owner_callsign")
+    private String ownerCallsign;
 
-    public Logbook(String title, String description, int priority) {
+    public Logbook(String title, String dateCreated, String ownerCallsign) {
         this.title = title;
-        this.description = description;
-        this.priority = priority;
+        this.dateCreated = dateCreated;
+        this.ownerCallsign = ownerCallsign;
     }
 
     public void setId(int id) {
@@ -34,11 +38,13 @@ public class Logbook {
         return title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDateCreated(){
+        return dateCreated;
     }
 
-    public int getPriority() {
-        return priority;
+    public String getOwnerCallsign(){
+        return ownerCallsign;
     }
+
+
 }

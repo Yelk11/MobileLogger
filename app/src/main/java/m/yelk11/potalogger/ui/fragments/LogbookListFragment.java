@@ -1,5 +1,7 @@
 package m.yelk11.potalogger.ui.fragments;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -9,31 +11,31 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.adapters.LogbookListAdapter;
+import m.yelk11.potalogger.dbc.Logbook;
 import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
 
 
-public class LogbookListFragment extends Fragment implements LogbookListAdapter.ItemClickListener {
+public class LogbookListFragment extends Fragment implements LogbookListAdapter.OnItemClickListener {
 
     private LogbookVM mViewModel;
     private RecyclerView.LayoutManager layoutManager;
     private LogbookListAdapter adapter;
-    private ArrayList<Logbook> logBookArray = null;
+    private LiveData<List<Logbook>> logBookArray = null;
 
 
     public static LogbookListFragment newInstance() {
@@ -68,35 +70,53 @@ public class LogbookListFragment extends Fragment implements LogbookListAdapter.
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
 
         RecyclerView recyclerView = getView().findViewById(R.id.logbook_list);
-        TextView textView = getView().findViewById(R.id.emptyLogBookListTextView);
+        final LogbookListAdapter adapter = new LogbookListAdapter();
+        recyclerView.setAdapter(adapter);
 
-        logBookArray = mViewModel.getLogbookData();
 
-        if (logBookArray == null) {
+        mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
+        mViewModel.getAllLogbooks().observe(getViewLifecycleOwner(), new Observer<List<Logbook>>() {
+            @Override
+            public void onChanged(@Nullable List<Logbook> logbook) {
+                adapter.submitList(logbook);
+            }
+        });
 
-            textView.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.INVISIBLE);
-        } else {
-            //Toast.makeText(getActivity(), "empty", Toast.LENGTH_SHORT).show();
-            textView.setVisibility(View.INVISIBLE);
-            recyclerView.setVisibility(View.VISIBLE);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            adapter = new LogbookListAdapter(getActivity(), logBookArray);
-            adapter.setClickListener(this);
-            recyclerView.setAdapter(adapter);
-        }
-    }
 
-    private void updateLogBookArray() {
-        this.logBookArray = mViewModel.exampleLogbookData();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        recyclerView.setHasFixedSize(true);
+
+        mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
+        mViewModel.getAllLogbooks().observe(getActivity(), new Observer<List<Logbook>>() {
+            @Override
+            public void onChanged(@Nullable List<Logbook> logbooks) {
+                adapter.submitList(logbooks);
+            }
+        });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(getActivity(), "Note deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(recyclerView);
+
+
     }
 
     @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position).getLogbookName() + " on row number " + position, Toast.LENGTH_SHORT).show();
+    public void onItemClick(Logbook logbook) {
+        //Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position).getTitle() + " on row number " + position, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -116,13 +136,5 @@ public class LogbookListFragment extends Fragment implements LogbookListAdapter.
         */
     }
 
-
-    public void loadDefault() {
-
-    }
-
-    public void loadFromFile(File file) {
-
-    }
 
 }

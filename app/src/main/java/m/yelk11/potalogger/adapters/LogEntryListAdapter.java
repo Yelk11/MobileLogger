@@ -5,107 +5,74 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.List;
 
 import m.yelk11.potalogger.R;
+import m.yelk11.potalogger.dbc.Entry;
+import m.yelk11.potalogger.dbc.Entry;
 
-public class LogEntryListAdapter extends RecyclerView.Adapter<LogEntryListAdapter.ViewHolder> {
+public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.EntryHolder> {
 
+    private OnItemClickListener listener;
 
-    private ArrayList<LogEntry> mData;
-    private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
-
-
-    /**
-     * data is passed into the constructor
-     * @param context
-     * @param data
-     */
-    public LogEntryListAdapter(Context context, ArrayList<LogEntry> data) {
-        this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
+    public LogEntryListAdapter() {
+        super(DIFF_CALLBACK);
     }
-
-    /**
-     * inflates the row layout from xml when needed
-     * @param parent
-     * @param viewType
-     * @return
-     */
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.logbook_list_fragment, parent, false);
-        return new ViewHolder(view);
-    }
-
-    /**
-     * binds the data to the TextView in each row
-     *
-     * @param holder
-     * @param position
-     */
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        LogEntry logEntry = mData.get(position);
-        holder.myTextView.setText(logEntry.getName());
-    }
-
-    /**
-     * total number of rows
-     *
-     * @return size of data
-     */
-    @Override
-    public int getItemCount() {
-        return mData.size();
-    }
-
-
-
-    /**
-     * stores and recycles views as they are scrolled off screen
-     */
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-            myTextView = itemView.findViewById(R.id.rowTextView);
-            itemView.setOnClickListener(this);
-        }
-
+    private static final DiffUtil.ItemCallback<Entry> DIFF_CALLBACK = new DiffUtil.ItemCallback<Entry>() {
         @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+        public boolean areItemsTheSame(Entry oldItem, Entry newItem) {
+            return oldItem.getEntryId() == newItem.getEntryId();
+        }
+        @Override
+        public boolean areContentsTheSame(Entry oldItem, Entry newItem) {
+            return oldItem.getEntryName().equals(newItem.getEntryName());
+        }
+    };
+    @NonNull
+    @Override
+    public LogEntryListAdapter.EntryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recycler_view_row, parent, false);
+        return new LogEntryListAdapter.EntryHolder(itemView);
+    }
+    @Override
+    public void onBindViewHolder(@NonNull LogEntryListAdapter.EntryHolder holder, int position) {
+        Entry currentEntry = getItem(position);
+        holder.title.setText(currentEntry.getEntryName());
+    }
+    public Entry getEntryAt(int position) {
+        return getItem(position);
+    }
+    class EntryHolder extends RecyclerView.ViewHolder {
+        private TextView title;
+
+
+        public EntryHolder(View itemView) {
+            super(itemView);
+
+            title = itemView.findViewById(R.id.rowTextView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(getItem(position));
+                    }
+                }
+            });
         }
     }
-
-    /**
-     * convenience method for getting data at click position
-     *
-     * @param id
-     * @return
-     */
-    public LogEntry getItem(int id) {
-        return mData.get(id);
+    public interface OnItemClickListener {
+        void onItemClick(Entry entry);
     }
-
-    /**
-     * allows clicks events to be caught
-     *
-     * @param itemClickListener
-     */
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
+    public void setOnItemClickListener(LogEntryListAdapter.OnItemClickListener listener) {
+        this.listener = listener;
     }
-
-    /**
-     * parent activity will implement this method to respond to click events
-     */
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
 }

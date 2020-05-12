@@ -11,7 +11,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import m.yelk11.potalogger.dbc.Entry;
+
 import m.yelk11.potalogger.dbc.Logbook;
 
 @Dao
@@ -30,7 +30,7 @@ public interface LogbookDao {
     @Query("DELETE FROM logbook_table")
     void deleteAllLogbooks();
 
-    @Query("SELECT * FROM logbook_table ORDER BY priority DESC")
+    @Query("SELECT * FROM logbook_table")
     LiveData<List<Logbook>> getAllLogbooks();
 
 }

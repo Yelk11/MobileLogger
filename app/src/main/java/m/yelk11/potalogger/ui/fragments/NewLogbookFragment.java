@@ -1,10 +1,12 @@
 package m.yelk11.potalogger.ui.fragments;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,8 +14,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.room.Room;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import m.yelk11.potalogger.R;
+import m.yelk11.potalogger.dbc.LogBookDatabase;
+import m.yelk11.potalogger.dbc.Logbook;
+import m.yelk11.potalogger.dbc.LogbookRepository;
 import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
 
 public class NewLogbookFragment extends Fragment {
@@ -38,9 +48,14 @@ public class NewLogbookFragment extends Fragment {
         Button submitBtn = view.findViewById(R.id.submit_new_logbook);
         NavController navController = Navigation.findNavController(view);
 
+        EditText ownerCallsign = getView().findViewById(R.id.new_book_edit_callsign);
+        EditText logbookName = getView().findViewById(R.id.new_book_name);
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                mViewModel.insert(new Logbook(logbookName.getText().toString(),currentDate, ownerCallsign.getText().toString()));
                 navController.navigate(R.id.action_newLogbookFragment_to_logEntryListFragment);
             }
         });

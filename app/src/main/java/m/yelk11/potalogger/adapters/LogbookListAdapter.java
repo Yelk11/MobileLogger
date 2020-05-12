@@ -1,80 +1,76 @@
 package m.yelk11.potalogger.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 
 
 import m.yelk11.potalogger.R;
+import m.yelk11.potalogger.dbc.Logbook;
 
 
-public class LogbookListAdapter extends RecyclerView.Adapter<LogbookListAdapter.ViewHolder> {
+public class LogbookListAdapter extends ListAdapter<Logbook, LogbookListAdapter.LogbookHolder> {
 
-    private ArrayList<Logbook> mData;
-    private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private OnItemClickListener listener;
 
-    // data is passed into the constructor
-    public LogbookListAdapter(Context context, ArrayList<Logbook> data) {
-        this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
+    public LogbookListAdapter() {
+        super(DIFF_CALLBACK);
     }
-
-    // inflates the row layout from xml when needed
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recycler_view_row, parent, false);
-        return new ViewHolder(view);
-    }
-
-    // binds the data to the TextView in each row
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Logbook logbook = mData.get(position);
-        holder.myTextView.setText(logbook.getLogbookName());
-    }
-
-    // total number of rows
-    @Override
-    public int getItemCount() {
-        return mData.size();
-    }
-
-
-    // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-            myTextView = itemView.findViewById(R.id.rowTextView);
-            itemView.setOnClickListener(this);
-        }
-
+    private static final DiffUtil.ItemCallback<Logbook> DIFF_CALLBACK = new DiffUtil.ItemCallback<Logbook>() {
         @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+        public boolean areItemsTheSame(Logbook oldItem, Logbook newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+        @Override
+        public boolean areContentsTheSame(Logbook oldItem, Logbook newItem) {
+            return oldItem.getTitle().equals(newItem.getTitle());
+        }
+    };
+    @NonNull
+    @Override
+    public LogbookHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recycler_view_row, parent, false);
+        return new LogbookHolder(itemView);
+    }
+    @Override
+    public void onBindViewHolder(@NonNull LogbookHolder holder, int position) {
+        Logbook currentNote = getItem(position);
+        holder.title.setText(currentNote.getTitle());
+    }
+    public Logbook getNoteAt(int position) {
+        return getItem(position);
+    }
+    class LogbookHolder extends RecyclerView.ViewHolder {
+        private TextView title;
+
+
+        public LogbookHolder(View itemView) {
+            super(itemView);
+
+            title = itemView.findViewById(R.id.rowTextView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(getItem(position));
+                    }
+                }
+            });
         }
     }
-
-    // convenience method for getting data at click position
-    public Logbook getItem(int id) {
-        return mData.get(id);
+    public interface OnItemClickListener {
+        void onItemClick(Logbook note);
     }
-
-    // allows clicks events to be caught
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

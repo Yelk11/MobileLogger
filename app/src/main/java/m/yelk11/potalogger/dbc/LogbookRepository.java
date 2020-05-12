@@ -3,6 +3,7 @@ package m.yelk11.potalogger.dbc;
 import android.app.Application;
 import android.os.AsyncTask;
 
+
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class LogbookRepository {
         new DeleteAllLogbookAsyncTask(logbookDao).execute();
     }
 
-    public LiveData<List<Logbook>> getAllLogbooks(){
+    public LiveData<List<Logbook>> getAllLogbooks() {
         return allLogbooks;
     }
 
@@ -88,4 +89,6 @@ public class LogbookRepository {
             return null;
         }
     }
+
+
 }

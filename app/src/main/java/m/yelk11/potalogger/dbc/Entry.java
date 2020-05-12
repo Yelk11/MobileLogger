@@ -2,21 +2,28 @@ package m.yelk11.potalogger.dbc;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "entry_table")
 public class Entry {
+    public void setEntryId(int entryId) {
+        this.entryId = entryId;
+    }
+
     @PrimaryKey(autoGenerate = true)
     private int entryId;
 
-    public Entry(long bookId, String firstName, String lastName, String address,
+
+    private int logbookId;
+
+    public Entry(int logbookId, String entryName, String firstName, String lastName, String address,
                  String addressINTL, String band, String bandRx, String comment,
                  String frequency, String frequencyRx, String gridsquare, String latitude,
                  String longitude, String mode, String name, String operator, String ownerCallsign,
                  String qsoDate, String rxPower, String sotaRef, String stationCallsign,
                  String txPower) {
-        this.bookId = bookId;
+        this.logbookId = logbookId;
+        this.entryName = entryName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -40,8 +47,8 @@ public class Entry {
         this.txPower = txPower;
     }
 
-
-    private long bookId;
+    @ColumnInfo(name = "entry_name")
+    private String entryName;
 
     @ColumnInfo(name = "first_name")
     private String firstName;
@@ -110,8 +117,12 @@ public class Entry {
         return entryId;
     }
 
-    public long getBookId() {
-        return bookId;
+    public int getLogbookId() {
+        return logbookId;
+    }
+
+    public String getEntryName() {
+        return entryName;
     }
 
     public String getFirstName() {

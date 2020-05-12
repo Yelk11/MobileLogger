@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.LogEntryListFragment">
 
-    <TextView
-        android:id="@+id/emptyLogBookListTextView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Empty" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/logbook_list"
         android:layout_width="match_parent"
