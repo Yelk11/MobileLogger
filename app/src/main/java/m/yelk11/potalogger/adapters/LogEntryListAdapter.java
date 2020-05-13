@@ -1,6 +1,5 @@
 package m.yelk11.potalogger.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
-import java.util.List;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.dbc.Entry;
 import m.yelk11.potalogger.dbc.Entry;
 
 public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.EntryHolder> {
@@ -38,7 +34,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
     @Override
     public LogEntryListAdapter.EntryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_view_row, parent, false);
+                .inflate(R.layout.entry_list_item, parent, false);
         return new LogEntryListAdapter.EntryHolder(itemView);
     }
     @Override
@@ -46,6 +42,9 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
         Entry currentEntry = getItem(position);
         holder.title.setText(currentEntry.getEntryName());
     }
+
+
+
     public Entry getEntryAt(int position) {
         return getItem(position);
     }
@@ -72,7 +71,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
     public interface OnItemClickListener {
         void onItemClick(Entry entry);
     }
-    public void setOnItemClickListener(LogEntryListAdapter.OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 }

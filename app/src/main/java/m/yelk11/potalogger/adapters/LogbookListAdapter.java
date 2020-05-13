@@ -1,9 +1,11 @@
 package m.yelk11.potalogger.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -32,21 +34,28 @@ public class LogbookListAdapter extends ListAdapter<Logbook, LogbookListAdapter.
             return oldItem.getTitle().equals(newItem.getTitle());
         }
     };
+
     @NonNull
     @Override
     public LogbookHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_view_row, parent, false);
+                .inflate(R.layout.logbook_list_item, parent, false);
         return new LogbookHolder(itemView);
     }
+
     @Override
     public void onBindViewHolder(@NonNull LogbookHolder holder, int position) {
         Logbook currentNote = getItem(position);
         holder.title.setText(currentNote.getTitle());
     }
+
     public Logbook getNoteAt(int position) {
         return getItem(position);
     }
+
+
+
+
     class LogbookHolder extends RecyclerView.ViewHolder {
         private TextView title;
 
@@ -68,7 +77,7 @@ public class LogbookListAdapter extends ListAdapter<Logbook, LogbookListAdapter.
         }
     }
     public interface OnItemClickListener {
-        void onItemClick(Logbook note);
+        void onItemClick(Logbook logbook);
     }
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;

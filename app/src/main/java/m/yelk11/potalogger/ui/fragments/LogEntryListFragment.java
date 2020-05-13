@@ -30,7 +30,7 @@ import m.yelk11.potalogger.dbc.Logbook;
 import m.yelk11.potalogger.ui.viewmodel.EntryVM;
 import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
 
-public class LogEntryListFragment extends Fragment implements LogEntryListAdapter.OnItemClickListener{
+public class LogEntryListFragment extends Fragment {
 
     private EntryVM mViewModel;
 
@@ -102,15 +102,21 @@ public class LogEntryListFragment extends Fragment implements LogEntryListAdapte
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 //mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getActivity(), "Note deleted", Toast.LENGTH_SHORT).show();
+
             }
         }).attachToRecyclerView(recyclerView);
 
+        
+        adapter.setOnItemClickListener(new LogEntryListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Entry entry) {
+
+
+                Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
-    @Override
-    public void onItemClick(Entry entry) {
-        //Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position).getTitle() + " on row number " + position, Toast.LENGTH_SHORT).show();
-    }
+
 }

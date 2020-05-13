@@ -30,7 +30,7 @@ import m.yelk11.potalogger.dbc.Logbook;
 import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
 
 
-public class LogbookListFragment extends Fragment implements LogbookListAdapter.OnItemClickListener {
+public class LogbookListFragment extends Fragment {
 
     private LogbookVM mViewModel;
     private RecyclerView.LayoutManager layoutManager;
@@ -111,13 +111,17 @@ public class LogbookListFragment extends Fragment implements LogbookListAdapter.
             }
         }).attachToRecyclerView(recyclerView);
 
+        adapter.setOnItemClickListener(new LogbookListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Logbook logbook) {
 
+
+                Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    @Override
-    public void onItemClick(Logbook logbook) {
-        //Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position).getTitle() + " on row number " + position, Toast.LENGTH_SHORT).show();
-    }
+
 
 
     public void save() {
