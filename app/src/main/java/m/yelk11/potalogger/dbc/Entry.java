@@ -2,19 +2,27 @@ package m.yelk11.potalogger.dbc;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "entry_table")
+import static androidx.room.ForeignKey.CASCADE;
+
+
+@Entity(foreignKeys = @ForeignKey(entity = Logbook.class,
+        parentColumns = "iLogBookId",
+        childColumns = "logbook_id",
+        onDelete = CASCADE))
 public class Entry {
     public void setEntryId(int entryId) {
         this.entryId = entryId;
     }
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "entry_id")
     private int entryId;
 
 
-    private int logbookId;
+
 
     public Entry(int logbookId, String entryName, String firstName, String lastName, String address,
                  String addressINTL, String band, String bandRx, String comment,
@@ -112,6 +120,9 @@ public class Entry {
 
     @ColumnInfo(name = "tx_pwr")
     private String txPower;
+
+    @ColumnInfo(name = "logbook_id")
+    public int logbookId;
 
     public int getEntryId() {
         return entryId;

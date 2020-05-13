@@ -33,6 +33,7 @@ import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
 public class LogEntryListFragment extends Fragment {
 
     private EntryVM mViewModel;
+    private NavController navController;
 
     public static LogEntryListFragment newInstance() {
         return new LogEntryListFragment();
@@ -49,7 +50,8 @@ public class LogEntryListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        NavController navController = Navigation.findNavController(view);
+
+        navController = Navigation.findNavController(view);
 
         FloatingActionButton fab = view.findViewById(R.id.log_entry_list_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -65,23 +67,11 @@ public class LogEntryListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        final LogEntryListAdapter adapter = new LogEntryListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.log_entry_list_recyclerview);
-        final LogEntryListAdapter adapter = new LogEntryListAdapter();
         recyclerView.setAdapter(adapter);
-
-
-        mViewModel = ViewModelProviders.of(this).get(EntryVM.class);
-        mViewModel.getAllEntries().observe(getViewLifecycleOwner(), new Observer<List<Entry>>() {
-            @Override
-            public void onChanged(@Nullable List<Entry> entry) {
-                adapter.submitList(entry);
-            }
-        });
-
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         recyclerView.setHasFixedSize(true);
 
         mViewModel = ViewModelProviders.of(this).get(EntryVM.class);
@@ -106,7 +96,7 @@ public class LogEntryListFragment extends Fragment {
             }
         }).attachToRecyclerView(recyclerView);
 
-        
+
         adapter.setOnItemClickListener(new LogEntryListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Entry entry) {

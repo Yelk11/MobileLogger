@@ -24,7 +24,7 @@ public interface EntryDao {
     void delete(Entry entry);
 
     @Query("DELETE FROM entry_table")
-    void deleteAllLogbooks();
+    void deleteAllEntries();
 
     @Query("SELECT * FROM entry_table")
     LiveData<List<Entry>> getAllEntries();

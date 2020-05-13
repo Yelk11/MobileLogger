@@ -16,6 +16,8 @@ import m.yelk11.potalogger.dbc.Entry;
 public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.EntryHolder> {
 
     private OnItemClickListener listener;
+    private int logbookId;
+
 
     public LogEntryListAdapter() {
         super(DIFF_CALLBACK);
@@ -39,6 +41,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
     }
     @Override
     public void onBindViewHolder(@NonNull LogEntryListAdapter.EntryHolder holder, int position) {
+
         Entry currentEntry = getItem(position);
         holder.title.setText(currentEntry.getEntryName());
     }

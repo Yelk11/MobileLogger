@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "logbook_table")
 public class Logbook {
 
+
+    @ColumnInfo(name = "iLogBookId")
     @PrimaryKey(autoGenerate = true)
     private int id;
 

@@ -13,6 +13,7 @@ import java.util.List;
 
 
 import m.yelk11.potalogger.dbc.Logbook;
+import m.yelk11.potalogger.dbc.LogbookAndAllEntries;
 
 @Dao
 public interface LogbookDao {
@@ -32,5 +33,8 @@ public interface LogbookDao {
 
     @Query("SELECT * FROM logbook_table")
     LiveData<List<Logbook>> getAllLogbooks();
+
+    @Query("SELECT id, name FROM Album")
+    List<LogbookAndAllEntries> loadAlbumAndSongs();
 
 }

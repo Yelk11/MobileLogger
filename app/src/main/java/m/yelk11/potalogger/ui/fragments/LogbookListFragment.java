@@ -33,10 +33,7 @@ import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
 public class LogbookListFragment extends Fragment {
 
     private LogbookVM mViewModel;
-    private RecyclerView.LayoutManager layoutManager;
-    private LogbookListAdapter adapter;
-    private LiveData<List<Logbook>> logBookArray = null;
-
+    private NavController navController;
 
     public static LogbookListFragment newInstance() {
         return new LogbookListFragment();
@@ -54,7 +51,7 @@ public class LogbookListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        NavController navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
 
         FloatingActionButton fab = view.findViewById(R.id.new_logbook_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -70,11 +67,12 @@ public class LogbookListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        final LogbookListAdapter adapter = new LogbookListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.logbook_list);
-        final LogbookListAdapter adapter = new LogbookListAdapter();
         recyclerView.setAdapter(adapter);
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
 
         mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
         mViewModel.getAllLogbooks().observe(getViewLifecycleOwner(), new Observer<List<Logbook>>() {
@@ -84,18 +82,6 @@ public class LogbookListFragment extends Fragment {
             }
         });
 
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        recyclerView.setHasFixedSize(true);
-
-        mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
-        mViewModel.getAllLogbooks().observe(getActivity(), new Observer<List<Logbook>>() {
-            @Override
-            public void onChanged(@Nullable List<Logbook> logbooks) {
-                adapter.submitList(logbooks);
-            }
-        });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -107,15 +93,16 @@ public class LogbookListFragment extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getActivity(), "Note deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Log deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
         adapter.setOnItemClickListener(new LogbookListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Logbook logbook) {
-
-
+                Bundle bundle = new Bundle();
+                bundle.putInt("logbook_id", logbook.getId());
+                navController.navigate(R.id.action_logbookListFragment_to_logEntryListFragment, bundle);
                 Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
             }
         });
