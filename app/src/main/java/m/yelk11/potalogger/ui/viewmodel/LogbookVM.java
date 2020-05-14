@@ -8,9 +8,6 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import m.yelk11.potalogger.dbc.Logbook;
-import m.yelk11.potalogger.dbc.LogbookRepository;
-
 public class LogbookVM extends AndroidViewModel {
 
     private LogbookRepository repository;

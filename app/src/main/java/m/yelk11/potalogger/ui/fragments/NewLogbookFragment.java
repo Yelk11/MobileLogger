@@ -1,6 +1,5 @@
 package m.yelk11.potalogger.ui.fragments;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.room.Room;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.dbc.LogBookDatabase;
-import m.yelk11.potalogger.dbc.Logbook;
-import m.yelk11.potalogger.dbc.LogbookRepository;
 import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
 
 public class NewLogbookFragment extends Fragment {

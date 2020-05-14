@@ -8,10 +8,6 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import m.yelk11.potalogger.dbc.Entry;
-import m.yelk11.potalogger.dbc.EntryRepository;
-import m.yelk11.potalogger.dbc.LogbookWithEntries;
-
 public class EntryVM extends AndroidViewModel {
 
     private EntryRepository repository;

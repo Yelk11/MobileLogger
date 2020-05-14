@@ -1,9 +1,7 @@
 package m.yelk11.potalogger.ui.fragments;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,9 +18,7 @@ import android.widget.EditText;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.dbc.Entry;
 import m.yelk11.potalogger.ui.viewmodel.EntryVM;
-import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
 
 public class LogEntryFragment extends Fragment {
 
