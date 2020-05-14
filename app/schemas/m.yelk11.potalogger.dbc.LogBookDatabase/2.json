@@ -2,15 +2,27 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "3a30851dc7f89c7162e2d8e72b3ca3ee",
+    "identityHash": "576959130c7f92ed062ce7b69f3f9b1d",
     "entities": [
       {
-        "tableName": "logbook_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `logbook_title` TEXT, `date_created` TEXT, `owner_callsign` TEXT)",
+        "tableName": "Logbook",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`logbookId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `age` INTEGER NOT NULL, `logbook_title` TEXT, `date_created` TEXT, `owner_callsign` TEXT)",
         "fields": [
           {
-            "fieldPath": "id",
-            "columnName": "id",
+            "fieldPath": "logbookId",
+            "columnName": "logbookId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -35,7 +47,7 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "logbookId"
           ],
           "autoGenerate": true
         },
@@ -43,8 +55,8 @@
         "foreignKeys": []
       },
       {
-        "tableName": "entry_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entryId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `logbookId` INTEGER NOT NULL, `entry_name` TEXT, `first_name` TEXT, `last_name` TEXT, `address` TEXT, `address_INTL` TEXT, `band` TEXT, `band_rx` TEXT, `comment` TEXT, `freq` TEXT, `freq_rx` TEXT, `gridsquare` TEXT, `lat` TEXT, `lon` TEXT, `mode` TEXT, `name` TEXT, `operator` TEXT, `owner_callsign` TEXT, `qso_date` TEXT, `rx_pwr` TEXT, `sota_ref` TEXT, `station_callsign` TEXT, `tx_pwr` TEXT)",
+        "tableName": "Entry",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entryId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `logbookCreatorId` INTEGER NOT NULL, `entry_name` TEXT, `first_name` TEXT, `last_name` TEXT, `address` TEXT, `address_INTL` TEXT, `band` TEXT, `band_rx` TEXT, `comment` TEXT, `freq` TEXT, `freq_rx` TEXT, `gridsquare` TEXT, `lat` TEXT, `lon` TEXT, `mode` TEXT, `name` TEXT, `operator` TEXT, `owner_callsign` TEXT, `qso_date` TEXT, `rx_pwr` TEXT, `sota_ref` TEXT, `station_callsign` TEXT, `tx_pwr` TEXT)",
         "fields": [
           {
             "fieldPath": "entryId",
@@ -53,8 +65,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "logbookId",
-            "columnName": "logbookId",
+            "fieldPath": "logbookCreatorId",
+            "columnName": "logbookCreatorId",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -204,7 +216,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3a30851dc7f89c7162e2d8e72b3ca3ee')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '576959130c7f92ed062ce7b69f3f9b1d')"
     ]
   }
 }

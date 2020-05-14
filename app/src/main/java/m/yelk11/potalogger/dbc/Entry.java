@@ -2,35 +2,24 @@ package m.yelk11.potalogger.dbc;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import static androidx.room.ForeignKey.CASCADE;
 
 
-@Entity(foreignKeys = @ForeignKey(entity = Logbook.class,
-        parentColumns = "iLogBookId",
-        childColumns = "logbook_id",
-        onDelete = CASCADE))
+@Entity
 public class Entry {
-    public void setEntryId(int entryId) {
-        this.entryId = entryId;
-    }
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "entry_id")
-    private int entryId;
+    @PrimaryKey(autoGenerate = true) public long entryId;
+    public long logbookCreatorId;
 
 
-
-
-    public Entry(int logbookId, String entryName, String firstName, String lastName, String address,
+    public Entry(long logbookCreatorId, String entryName, String firstName, String lastName, String address,
                  String addressINTL, String band, String bandRx, String comment,
                  String frequency, String frequencyRx, String gridsquare, String latitude,
                  String longitude, String mode, String name, String operator, String ownerCallsign,
                  String qsoDate, String rxPower, String sotaRef, String stationCallsign,
                  String txPower) {
-        this.logbookId = logbookId;
+        this.logbookCreatorId = logbookCreatorId;
         this.entryName = entryName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -121,16 +110,13 @@ public class Entry {
     @ColumnInfo(name = "tx_pwr")
     private String txPower;
 
-    @ColumnInfo(name = "logbook_id")
-    public int logbookId;
 
-    public int getEntryId() {
+
+
+    public long getId() {
         return entryId;
     }
 
-    public int getLogbookId() {
-        return logbookId;
-    }
 
     public String getEntryName() {
         return entryName;

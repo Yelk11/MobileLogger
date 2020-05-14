@@ -37,8 +37,14 @@ public class EntryRepository {
         new EntryRepository.DeleteEntryAsyncTask(entryDao).execute();
     }
 
+
     public LiveData<List<Entry>> getAllEntries(){
         return allEntries;
+    }
+
+    public LiveData<List<LogbookWithEntries>> getLogbookEntries()
+    {
+        return entryDao.getLogbookEntries();
     }
 
     private static class InsertEntryAsyncTask extends AsyncTask<Entry, Void, Void> {
@@ -84,8 +90,11 @@ public class EntryRepository {
         }
         @Override
         protected Void doInBackground(Entry... entries) {
-            entryDao.deleteAllLogbooks();
+            entryDao.deleteAllEntries();
             return null;
         }
     }
+
+
+
 }

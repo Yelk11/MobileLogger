@@ -6,9 +6,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.dbc.Entry;
@@ -16,16 +20,18 @@ import m.yelk11.potalogger.dbc.Entry;
 public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.EntryHolder> {
 
     private OnItemClickListener listener;
-    private int logbookId;
 
+    private List<Entry> entries = new ArrayList<Entry>();
 
     public LogEntryListAdapter() {
         super(DIFF_CALLBACK);
+
+
     }
     private static final DiffUtil.ItemCallback<Entry> DIFF_CALLBACK = new DiffUtil.ItemCallback<Entry>() {
         @Override
         public boolean areItemsTheSame(Entry oldItem, Entry newItem) {
-            return oldItem.getEntryId() == newItem.getEntryId();
+            return oldItem.getId() == newItem.getId();
         }
         @Override
         public boolean areContentsTheSame(Entry oldItem, Entry newItem) {
@@ -51,6 +57,11 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
     public Entry getEntryAt(int position) {
         return getItem(position);
     }
+
+    public Entry getNoteAt(int position) {
+        return getItem(position);
+    }
+
     class EntryHolder extends RecyclerView.ViewHolder {
         private TextView title;
 
@@ -72,7 +83,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
         }
     }
     public interface OnItemClickListener {
-        void onItemClick(Entry entry);
+        void onItemClick(Entry logbookWithEntries);
     }
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;

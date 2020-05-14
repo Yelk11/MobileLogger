@@ -1,7 +1,5 @@
 package m.yelk11.potalogger.interfaces;
 
-import android.provider.ContactsContract;
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -13,7 +11,7 @@ import java.util.List;
 
 
 import m.yelk11.potalogger.dbc.Logbook;
-import m.yelk11.potalogger.dbc.LogbookAndAllEntries;
+import m.yelk11.potalogger.dbc.LogbookWithEntries;
 
 @Dao
 public interface LogbookDao {
@@ -28,13 +26,11 @@ public interface LogbookDao {
     @Delete
     void delete(Logbook note);
 
-    @Query("DELETE FROM logbook_table")
+    @Query("DELETE FROM Logbook")
     void deleteAllLogbooks();
 
-    @Query("SELECT * FROM logbook_table")
+    @Query("SELECT * FROM Logbook")
     LiveData<List<Logbook>> getAllLogbooks();
 
-    @Query("SELECT id, name FROM Album")
-    List<LogbookAndAllEntries> loadAlbumAndSongs();
 
 }

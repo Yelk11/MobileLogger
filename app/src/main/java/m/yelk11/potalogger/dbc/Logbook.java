@@ -5,13 +5,13 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tableName = "logbook_table")
+@Entity
 public class Logbook {
 
+    @PrimaryKey(autoGenerate = true) public long logbookId;
+    public  String name;
+    public int age;
 
-    @ColumnInfo(name = "iLogBookId")
-    @PrimaryKey(autoGenerate = true)
-    private int id;
 
     @ColumnInfo(name = "logbook_title")
     private String title;
@@ -28,12 +28,12 @@ public class Logbook {
         this.ownerCallsign = ownerCallsign;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int logbookId) {
+        this.logbookId = logbookId;
     }
 
-    public int getId() {
-        return id;
+    public long getId() {
+        return logbookId;
     }
 
     public String getTitle() {

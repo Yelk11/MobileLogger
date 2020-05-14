@@ -10,16 +10,20 @@ import java.util.List;
 
 import m.yelk11.potalogger.dbc.Entry;
 import m.yelk11.potalogger.dbc.EntryRepository;
+import m.yelk11.potalogger.dbc.LogbookWithEntries;
 
 public class EntryVM extends AndroidViewModel {
 
     private EntryRepository repository;
     private LiveData<List<Entry>> allEntries;
+    private LiveData<List<LogbookWithEntries>> logbookEntries;
+    private int logbookId;
 
     public EntryVM(@NonNull Application application){
         super(application);
         repository = new EntryRepository(application);
         allEntries = repository.getAllEntries();
+        logbookEntries = repository.getLogbookEntries();
     }
 
     public void insert(Entry entry){
@@ -40,5 +44,14 @@ public class EntryVM extends AndroidViewModel {
 
     public LiveData<List<Entry>> getAllEntries(){
         return allEntries;
+    }
+
+
+    public void setLogbookId(int logbookId){
+        this.logbookId = logbookId;
+    }
+
+    public LiveData<List<LogbookWithEntries>> getLogbookEntries(){
+        return logbookEntries;
     }
 }

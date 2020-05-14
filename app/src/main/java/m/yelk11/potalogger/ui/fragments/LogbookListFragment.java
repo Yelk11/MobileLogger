@@ -101,7 +101,7 @@ public class LogbookListFragment extends Fragment {
             @Override
             public void onItemClick(Logbook logbook) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("logbook_id", logbook.getId());
+                bundle.putLong("logbookId", logbook.getId());
                 navController.navigate(R.id.action_logbookListFragment_to_logEntryListFragment, bundle);
                 Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
             }

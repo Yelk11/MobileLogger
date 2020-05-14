@@ -1,5 +1,6 @@
 package m.yelk11.potalogger.ui.fragments;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import m.yelk11.potalogger.adapters.LogEntryListAdapter;
 import m.yelk11.potalogger.adapters.LogbookListAdapter;
 import m.yelk11.potalogger.dbc.Entry;
 import m.yelk11.potalogger.dbc.Logbook;
+import m.yelk11.potalogger.dbc.LogbookWithEntries;
 import m.yelk11.potalogger.ui.viewmodel.EntryVM;
 import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
 
@@ -67,6 +69,9 @@ public class LogEntryListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(EntryVM.class);
+
+
         final LogEntryListAdapter adapter = new LogEntryListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.log_entry_list_recyclerview);
@@ -74,13 +79,14 @@ public class LogEntryListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
-        mViewModel = ViewModelProviders.of(this).get(EntryVM.class);
-        mViewModel.getAllEntries().observe(getActivity(), new Observer<List<Entry>>() {
+
+        mViewModel.getLogbookEntries().observe(getActivity(), new Observer<List<LogbookWithEntries>>() {
             @Override
-            public void onChanged(@Nullable List<Entry> entry) {
-                adapter.submitList(entry);
+            public void onChanged(@Nullable List<LogbookWithEntries> logbookWithEntries) {
+                adapter.submitList(logbookWithEntries.get(getArguments().getInt("logbook_id")).entries);
             }
         });
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -91,7 +97,7 @@ public class LogEntryListFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                //mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
+                mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
 
             }
         }).attachToRecyclerView(recyclerView);
@@ -99,7 +105,7 @@ public class LogEntryListFragment extends Fragment {
 
         adapter.setOnItemClickListener(new LogEntryListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Entry entry) {
+            public void onItemClick(Entry entries) {
 
 
                 Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();

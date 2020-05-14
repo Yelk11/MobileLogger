@@ -23,8 +23,10 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="94dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <TableLayout
@@ -55,7 +57,7 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/entry_date"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ems="10"
@@ -63,7 +65,7 @@
                     android:text="date" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/entry_time"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ems="10"
@@ -93,7 +95,7 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/editText7"
+                    android:id="@+id/entry_freq"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
@@ -101,7 +103,7 @@
                     android:text="Freq" />
 
                 <EditText
-                    android:id="@+id/editText6"
+                    android:id="@+id/entry_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -127,20 +129,20 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/editText9"
+                    android:id="@+id/entry_callsign_tx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:text="Callsign_tx" />
 
                 <EditText
-                    android:id="@+id/editText8"
+                    android:id="@+id/entry_callsign_rx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:text="Callsign rx" />
             </TableRow>
 
             <TableRow
@@ -159,20 +161,20 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/editText11"
+                    android:id="@+id/entry_power_tx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:text="Power tx" />
 
                 <EditText
-                    android:id="@+id/editText10"
+                    android:id="@+id/entry_power_rx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:text="Power rx" />
             </TableRow>
 
             <TableRow
@@ -192,20 +194,20 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/editText13"
+                    android:id="@+id/entry_signal_tx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:text="Signal tx" />
 
                 <EditText
-                    android:id="@+id/editText12"
+                    android:id="@+id/entry_signal_rx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:text="signal rx" />
             </TableRow>
 
             <TableRow
@@ -224,20 +226,20 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/editText15"
+                    android:id="@+id/entry_gridsquare_tx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:text="gridsquare tx" />
 
                 <EditText
-                    android:id="@+id/editText14"
+                    android:id="@+id/entry_gridsquare_rx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:text="gridsquare rx" />
             </TableRow>
         </TableLayout>
     </ScrollView>
