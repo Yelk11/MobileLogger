@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.dbc.Entry;
+import m.yelk11.potalogger.dbc.entity.Entry;
 
 public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.EntryHolder> {
 

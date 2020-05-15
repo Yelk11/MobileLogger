@@ -1,6 +1,5 @@
 package m.yelk11.potalogger.ui.fragments;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -26,13 +25,13 @@ import java.util.List;
 
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.adapters.LogbookListAdapter;
-import m.yelk11.potalogger.dbc.Logbook;
-import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
+import m.yelk11.potalogger.dbc.entity.Logbook;
+import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
 
 
 public class LogbookListFragment extends Fragment {
 
-    private LogbookVM mViewModel;
+    private LogbookViewModel mViewModel;
     private NavController navController;
 
     public static LogbookListFragment newInstance() {
@@ -74,7 +73,7 @@ public class LogbookListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
-        mViewModel = ViewModelProviders.of(this).get(LogbookVM.class);
+        mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
         mViewModel.getAllLogbooks().observe(getViewLifecycleOwner(), new Observer<List<Logbook>>() {
             @Override
             public void onChanged(@Nullable List<Logbook> logbook) {

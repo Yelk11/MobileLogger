@@ -1,6 +1,5 @@
 package m.yelk11.potalogger.ui.fragments;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -15,26 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.adapters.LogEntryListAdapter;
-import m.yelk11.potalogger.adapters.LogbookListAdapter;
-import m.yelk11.potalogger.dbc.Entry;
-import m.yelk11.potalogger.dbc.Logbook;
-import m.yelk11.potalogger.dbc.LogbookWithEntries;
-import m.yelk11.potalogger.ui.viewmodel.EntryVM;
-import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
+import m.yelk11.potalogger.dbc.entity.Entry;
+import m.yelk11.potalogger.dbc.entity.Logbook;
+import m.yelk11.potalogger.dbc.entity.LogbookEntries;
+import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
 
 public class LogEntryListFragment extends Fragment {
 
-    private EntryVM mViewModel;
+    private LogbookViewModel mViewModel;
     private NavController navController;
 
     public static LogEntryListFragment newInstance() {
@@ -69,7 +64,7 @@ public class LogEntryListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(EntryVM.class);
+        mViewModel = ViewModelProviders.of(this).get(Logbook.class);
 
 
         final LogEntryListAdapter adapter = new LogEntryListAdapter();
@@ -79,10 +74,12 @@ public class LogEntryListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
+        mViewModel.getLogbooks().getValue().get(1).
 
-        mViewModel.getLogbookEntries().observe(getActivity(), new Observer<List<LogbookWithEntries>>() {
+
+        mViewModel.getLogbookEntries().observe(getActivity(), new Observer<List<LogbookEntries>>() {
             @Override
-            public void onChanged(@Nullable List<LogbookWithEntries> logbookWithEntries) {
+            public void onChanged(@Nullable List<LogbookEntries> logbookWithEntries) {
                 adapter.submitList(logbookWithEntries.get(getArguments().getInt("logbook_id")).entries);
             }
         });

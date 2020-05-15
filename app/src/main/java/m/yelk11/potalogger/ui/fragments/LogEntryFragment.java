@@ -1,9 +1,7 @@
 package m.yelk11.potalogger.ui.fragments;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,13 +18,12 @@ import android.widget.EditText;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.dbc.Entry;
-import m.yelk11.potalogger.ui.viewmodel.EntryVM;
-import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
+import m.yelk11.potalogger.dbc.entity.Entry;
+import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
 
 public class LogEntryFragment extends Fragment {
 
-    private EntryVM mViewModel;
+    private LogbookViewModel mViewModel;
     private NavController navController;
 
 
@@ -62,15 +59,9 @@ public class LogEntryFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Entry entry = new Entry(0,"LogEntryFragmentLine65",
-                        "","","", "","","",
-                        "",frequency.getText().toString(),"",
-                        gridsquareRx.getText().toString(),"","",
-                        mode.getText().toString(),"","",
-                        "",date.getText().toString(),signalRx.getText().toString(),
-                        "","",signalTx.getText().toString());
 
-                mViewModel.insert(entry);
+
+                mViewModel.insertEntry(getArguments().getLong("logbook_id"), new Entry("TEST","CALLSIGN"));
 
                 navController.navigate(R.id.action_logEntryFragment_to_logEntryListFragment);
             }
@@ -81,7 +72,7 @@ public class LogEntryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(EntryVM.class);
+        mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
 
 
 
