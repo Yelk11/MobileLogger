@@ -15,7 +15,6 @@ public class LogbookEntries {
     @Embedded
     public Logbook logbook;
 
-
     @Relation(
             parentColumn = "id",
             entityColumn = "logbookId",
@@ -23,22 +22,22 @@ public class LogbookEntries {
     )
     public List<Entry> entries;
 
-    public Logbook getLogbook()
-    {
-        return logbook;
-    }
-
-    public void setLogbook(Logbook logbook){
-        this.logbook = logbook;
-    }
-
-    public List<Entry> getEntries(){
-        return entries;
-    }
-
-    public void setEntries(List<Entry> entries){
-        this.entries = entries;
-    }
+//    public Logbook getLogbook()
+//    {
+//        return logbook;
+//    }
+//
+//    public void setLogbook(Logbook logbook){
+//        this.logbook = logbook;
+//    }
+//
+//    public List<Entry> getEntries(){
+//        return entries;
+//    }
+//
+//    public void setEntries(List<Entry> entries){
+//        this.entries = entries;
+//    }
 
 
     public String toString() {

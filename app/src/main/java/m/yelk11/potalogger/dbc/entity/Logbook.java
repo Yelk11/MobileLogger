@@ -14,11 +14,12 @@ import static androidx.room.ForeignKey.CASCADE;
 public class Logbook {
 
     @PrimaryKey(autoGenerate = true)
-    public long id;
+    public int id;
 
 
     private String title;
     private String callsign;
+
 
 
 
@@ -32,12 +33,12 @@ public class Logbook {
         this.callsign = callsign;
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

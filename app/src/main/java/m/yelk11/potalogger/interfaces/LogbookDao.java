@@ -19,47 +19,64 @@ import m.yelk11.potalogger.dbc.entity.LogbookEntries;
 @Dao
 public interface LogbookDao {
 
-    @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long saveLogbook(Logbook logbook);
+
+    //Logbook
+
 
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void saveLogbook(List<Logbook> logbooks);
+    @Insert
+    Long insert(Logbook logbook);
 
     @Transaction
-    @Query("SELECT * FROM logbook WHERE id = :logbookId")
-    LiveData<Logbook> getLogbook(Long logbookId);
+    @Update
+    void update(Logbook logbook);
+
+    @Transaction
+    @Delete
+    void delete(Logbook logbook);
+
+    @Transaction
+    @Query("DELETE FROM logbook")
+    void deleteAllLogbooks();
+
 
     @Transaction
     @Query("SELECT * FROM logbook")
-    LiveData<List<Logbook>> getLogbooks();
+    LiveData<List<Logbook>> getAllLogbooks();
 
 
     // Entries
 
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void saveEntry(Entry entry);
+    @Insert
+    Long insert(Entry entry);
 
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void saveEntries(List<Entry> entries);
+    @Update
+    void update(Entry entry);
 
-
-    //delete
     @Transaction
-    @Query("DELETE FROM logbook")
-    void deleteLogbooks();
+    @Delete
+    void delete(Entry entry);
+
+    @Transaction
+    @Query("DELETE FROM entry")
+    void deleteAllEntries();
+
+
+    @Transaction
+    @Query("SELECT * FROM entry")
+    LiveData<List<Entry>> getAllEntries();
 
 
 
     // POJO
     @Transaction
     @Query("SELECT * FROM logbook WHERE id = :logbookId")
-    LiveData<List<LogbookEntries>> loadLogbookEntries(Long logbookId);
+    LiveData<List<LogbookEntries>> getLogbookEntries(int logbookId);
 
+    @Transaction
+    @Query("SELECT * FROM logbook")
+    LiveData<List<LogbookEntries>> getLogbookEntries();
 
-    @Insert
-    void insertLogbookwithEntry(Long logbookId, Entry entry);
 }

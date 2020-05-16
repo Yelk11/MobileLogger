@@ -2,52 +2,34 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "576959130c7f92ed062ce7b69f3f9b1d",
+    "identityHash": "ab66cdcad2bee845dff6032ab5c3aef9",
     "entities": [
       {
         "tableName": "Logbook",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`logbookId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `age` INTEGER NOT NULL, `logbook_title` TEXT, `date_created` TEXT, `owner_callsign` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `callsign` TEXT)",
         "fields": [
           {
-            "fieldPath": "logbookId",
-            "columnName": "logbookId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "age",
-            "columnName": "age",
+            "fieldPath": "id",
+            "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "title",
-            "columnName": "logbook_title",
+            "columnName": "title",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "dateCreated",
-            "columnName": "date_created",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "ownerCallsign",
-            "columnName": "owner_callsign",
+            "fieldPath": "callsign",
+            "columnName": "callsign",
             "affinity": "TEXT",
             "notNull": false
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "logbookId"
+            "id"
           ],
           "autoGenerate": true
         },
@@ -56,156 +38,36 @@
       },
       {
         "tableName": "Entry",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entryId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `logbookCreatorId` INTEGER NOT NULL, `entry_name` TEXT, `first_name` TEXT, `last_name` TEXT, `address` TEXT, `address_INTL` TEXT, `band` TEXT, `band_rx` TEXT, `comment` TEXT, `freq` TEXT, `freq_rx` TEXT, `gridsquare` TEXT, `lat` TEXT, `lon` TEXT, `mode` TEXT, `name` TEXT, `operator` TEXT, `owner_callsign` TEXT, `qso_date` TEXT, `rx_pwr` TEXT, `sota_ref` TEXT, `station_callsign` TEXT, `tx_pwr` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `callsign` TEXT, `logbookId` INTEGER NOT NULL)",
         "fields": [
           {
-            "fieldPath": "entryId",
-            "columnName": "entryId",
+            "fieldPath": "id",
+            "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "logbookCreatorId",
-            "columnName": "logbookCreatorId",
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "callsign",
+            "columnName": "callsign",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "logbookId",
+            "columnName": "logbookId",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "entryName",
-            "columnName": "entry_name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "firstName",
-            "columnName": "first_name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "lastName",
-            "columnName": "last_name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "address",
-            "columnName": "address",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "addressINTL",
-            "columnName": "address_INTL",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "band",
-            "columnName": "band",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "bandRx",
-            "columnName": "band_rx",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "comment",
-            "columnName": "comment",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "frequency",
-            "columnName": "freq",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "frequencyRx",
-            "columnName": "freq_rx",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "gridsquare",
-            "columnName": "gridsquare",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "latitude",
-            "columnName": "lat",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "longitude",
-            "columnName": "lon",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "mode",
-            "columnName": "mode",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "operator",
-            "columnName": "operator",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "ownerCallsign",
-            "columnName": "owner_callsign",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "qsoDate",
-            "columnName": "qso_date",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "rxPower",
-            "columnName": "rx_pwr",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "sotaRef",
-            "columnName": "sota_ref",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "stationCallsign",
-            "columnName": "station_callsign",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "txPower",
-            "columnName": "tx_pwr",
-            "affinity": "TEXT",
-            "notNull": false
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "entryId"
+            "id"
           ],
           "autoGenerate": true
         },
@@ -216,7 +78,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '576959130c7f92ed062ce7b69f3f9b1d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ab66cdcad2bee845dff6032ab5c3aef9')"
     ]
   }
 }

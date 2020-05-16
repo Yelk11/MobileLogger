@@ -17,36 +17,23 @@ public class DatabaseHelper {
         logbookDao = database.logbookDao();
     }
 
-    private void insertEntryforLogbook(Long id, List<Entry> entries) {
-        if (id == null) throw new NullPointerException();
+    public void insertEntryforLogbook(int id, List<Entry> entries) {
+
 
         for (int i = 0; i < entries.size(); i++) {
             entries.get(i).setLogbookId(id);
+            logbookDao.insert(entries.get(i));
         }
     }
 
-    public void saveLogbook(Logbook logbook) {
-        Long id = logbookDao.saveLogbook(logbook);
-        insertEntryforLogbook(id, logbook.getEntries());
+    public  void insertEntry(int logbookId, Entry entry){
+        entry.setLogbookId(logbookId);
+        logbookDao.insert(entry);
     }
 
-    public void setLogbookDao(LogbookDao logbookDao) {
-        this.logbookDao = logbookDao;
+
+    public LiveData<List<LogbookEntries>> getLogbookEntries(int id) {
+        return logbookDao.getLogbookEntries(id);
     }
 
-    public LogbookDao getLogbookDao() {
-        return logbookDao;
-    }
-
-    public LiveData<List<Logbook>> getLogbooks() {
-        return logbookDao.getLogbooks();
-    }
-
-    public LiveData<List<LogbookEntries>> loadLogbookEntries(Long id) {
-        return logbookDao.loadLogbookEntries(id);
-    }
-
-    public void insertEntry(Long logbookId, Entry entry) {
-        logbookDao.insertLogbookwithEntry(logbookId, entry);
-    }
 }

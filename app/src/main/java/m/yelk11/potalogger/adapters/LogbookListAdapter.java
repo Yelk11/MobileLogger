@@ -43,8 +43,8 @@ public class LogbookListAdapter extends ListAdapter<Logbook, LogbookListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull LogbookHolder holder, int position) {
-        Logbook currentNote = getItem(position);
-        holder.title.setText(currentNote.getTitle());
+        Logbook currentLogbook = getItem(position);
+        holder.title.setText(currentLogbook.getTitle());
     }
 
     public Logbook getNoteAt(int position) {

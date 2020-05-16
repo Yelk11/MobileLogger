@@ -59,11 +59,17 @@ public class LogEntryFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Entry entry = new Entry();
+                entry.setLogbookId(0);
+                entry.setTitle("Title");
+                entry.setCallsign("Callsign");
 
 
-                mViewModel.insertEntry(getArguments().getLong("logbook_id"), new Entry("TEST","CALLSIGN"));
+                mViewModel.insert(entry);
 
-                navController.navigate(R.id.action_logEntryFragment_to_logEntryListFragment);
+                Bundle bundle = new Bundle();
+                bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
+                navController.navigate(R.id.action_logEntryFragment_to_logEntryListFragment, bundle);
             }
         });
 

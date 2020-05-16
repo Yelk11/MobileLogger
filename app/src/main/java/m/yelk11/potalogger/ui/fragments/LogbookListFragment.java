@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +57,7 @@ public class LogbookListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 navController.navigate(R.id.action_logbookListFragment_to_newLogbookFragment);
-
             }
         });
     }
@@ -77,6 +76,7 @@ public class LogbookListFragment extends Fragment {
         mViewModel.getAllLogbooks().observe(getViewLifecycleOwner(), new Observer<List<Logbook>>() {
             @Override
             public void onChanged(@Nullable List<Logbook> logbook) {
+                Log.d("LOOK", "it happened");
                 adapter.submitList(logbook);
             }
         });
@@ -91,7 +91,7 @@ public class LogbookListFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
+                //mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getActivity(), "Log deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
@@ -100,7 +100,7 @@ public class LogbookListFragment extends Fragment {
             @Override
             public void onItemClick(Logbook logbook) {
                 Bundle bundle = new Bundle();
-                bundle.putLong("logbookId", logbook.getId());
+                bundle.putInt("logbook_id", logbook.getId());
                 navController.navigate(R.id.action_logbookListFragment_to_logEntryListFragment, bundle);
                 Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
             }

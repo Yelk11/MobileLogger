@@ -51,7 +51,7 @@ public class NewLogbookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                mViewModel.insertLogbook(new Logbook(logbookName.getText().toString(),ownerCallsign.getText().toString()));
+                mViewModel.insert(new Logbook(logbookName.getText().toString(),ownerCallsign.getText().toString()));
 
                 navController.navigate(R.id.action_newLogbookFragment_to_logEntryListFragment);
             }

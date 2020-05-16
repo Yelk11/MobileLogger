@@ -14,7 +14,7 @@ import static androidx.room.ForeignKey.CASCADE;
 public class Entry {
 
     @PrimaryKey(autoGenerate = true)
-    public long id;
+    public int id;
 
 
     private String title;
@@ -32,12 +32,12 @@ public class Entry {
         this.callsign = callsign;
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
 
-    public Long getLogbookId() {
+    public int getLogbookId() {
         return logbookId;
     }
 
@@ -46,14 +46,14 @@ public class Entry {
                     parentColumns = "id",
                     childColumns = "logbookId",
                     onDelete = CASCADE)
-    private Long logbookId;
+    private int logbookId;
 
 
 
-    public void setId(Long id){
+    public void setId(int id){
         this.id = id;
     }
-    public void setLogbookId(Long logbookId){
+    public void setLogbookId(int logbookId){
         this.logbookId = logbookId;
     }
     public void setTitle(String title){

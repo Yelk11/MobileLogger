@@ -11,6 +11,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import m.yelk11.potalogger.R;
@@ -55,7 +58,9 @@ public class LogEntryListFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment);
+                Bundle bundle = new Bundle();
+                bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
+                navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment, bundle);
 
             }
         });
@@ -64,7 +69,7 @@ public class LogEntryListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(Logbook.class);
+        mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
 
 
         final LogEntryListAdapter adapter = new LogEntryListAdapter();
@@ -74,13 +79,15 @@ public class LogEntryListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
-        mViewModel.getLogbooks().getValue().get(1).
 
 
-        mViewModel.getLogbookEntries().observe(getActivity(), new Observer<List<LogbookEntries>>() {
+
+        mViewModel.getLogbookEntries(getArguments().getInt("logbook_id")).observe(getActivity(), new Observer<List<LogbookEntries>>() {
             @Override
-            public void onChanged(@Nullable List<LogbookEntries> logbookWithEntries) {
-                adapter.submitList(logbookWithEntries.get(getArguments().getInt("logbook_id")).entries);
+            public void onChanged(@Nullable List<LogbookEntries> logbookEntries) {
+
+
+                adapter.submitList(logbookEntries.get(0).entries);
             }
         });
 

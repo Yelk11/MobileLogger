@@ -34,7 +34,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
         }
         @Override
         public boolean areContentsTheSame(Entry oldItem, Entry newItem) {
-            return oldItem.getEntryName().equals(newItem.getEntryName());
+            return oldItem.getTitle().equals(newItem.getTitle());
         }
     };
     @NonNull
@@ -48,7 +48,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
     public void onBindViewHolder(@NonNull LogEntryListAdapter.EntryHolder holder, int position) {
 
         Entry currentEntry = getItem(position);
-        holder.title.setText(currentEntry.getEntryName());
+        holder.callsign.setText(currentEntry.getTitle());
     }
 
 
@@ -62,13 +62,13 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
     }
 
     class EntryHolder extends RecyclerView.ViewHolder {
-        private TextView title;
+        private TextView callsign;
 
 
         public EntryHolder(View itemView) {
             super(itemView);
 
-            title = itemView.findViewById(R.id.rowTextView);
+            callsign = itemView.findViewById(R.id.entry_callsign);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,7 +82,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
         }
     }
     public interface OnItemClickListener {
-        void onItemClick(Entry logbookWithEntries);
+        void onItemClick(Entry entry);
     }
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;

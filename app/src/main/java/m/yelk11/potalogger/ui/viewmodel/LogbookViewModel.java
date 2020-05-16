@@ -10,29 +10,82 @@ import java.util.List;
 
 import m.yelk11.potalogger.dbc.entity.Entry;
 import m.yelk11.potalogger.dbc.entity.Logbook;
+import m.yelk11.potalogger.dbc.entity.LogbookEntries;
 import m.yelk11.potalogger.repository.LogbookRepository;
 
 public class LogbookViewModel extends AndroidViewModel {
 
     private LogbookRepository mRepository;
-
+    private LiveData<List<Logbook>> allLogbooks;
+    private LiveData<List<Entry>> allEntries;
 
     public LogbookViewModel(Application application) {
         super(application);
-        this.mRepository = mRepository;
+        this.mRepository = new LogbookRepository(getApplication());
+        allLogbooks = mRepository.getAllLogbooks();
+        allEntries = mRepository.getAllEntries();
     }
 
 
-    public LiveData<List<Logbook>> getLogbooks() {
-        return mRepository.getLogbooks();
+    /**
+     *
+     *        LOGBOOK
+     *
+     *
+     */
+
+
+    public void insert(Logbook logbook) {
+        mRepository.insert(logbook);
+    }
+    public void update(Logbook logbook) {
+        mRepository.update(logbook);
+    }
+    public void delete(Logbook logbook) {
+        mRepository.delete(logbook);
+    }
+    public void deleteAllLogbooks() {
+        mRepository.deleteAllLogbooks();
+    }
+    public LiveData<List<Logbook>> getAllLogbooks() {
+        return allLogbooks;
     }
 
-    public void insertLogbook(Logbook logbook)
-    {
+    /**
+     *
+     *        ENTRIES
+     *
+     *
+     */
 
+    public void insert(Entry entry) {
+        mRepository.insert(entry);
+    }
+    public void update(Entry entry) {
+        mRepository.update(entry);
+    }
+    public void delete(Entry entry) {
+        mRepository.delete(entry);
+    }
+    public void deleteAllEntries() {
+        mRepository.deleteAllEntries();
+    }
+    public LiveData<List<Entry>> getAllEntries() {
+        return allEntries;
     }
 
-    public void insertEntry(Long logbookId, Entry entry){
 
+
+
+
+    /**
+     *
+     *        LOGBOOK_ENTRIES
+     *
+     *
+     */
+
+    public LiveData<List<LogbookEntries>> getLogbookEntries(int id){
+        return mRepository.getLogbookEntries(id);
     }
 }
