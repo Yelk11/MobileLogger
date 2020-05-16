@@ -58,9 +58,19 @@ public class LogEntryListFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Bundle bundle = new Bundle();
-                bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
-                navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment, bundle);
+                Log.d("LOOK", "Logbook id: " + Integer.toString(getArguments().getInt("logbook_id")));
+
+
+                Entry newEntry = new Entry();
+                newEntry.setLogbookId(getArguments().getInt("logbook_id"));
+                newEntry.setCallsign("callsign");
+                newEntry.setTitle("TItle");
+
+                mViewModel.insert(newEntry);
+
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
+//                navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment, bundle);
 
             }
         });
@@ -82,12 +92,10 @@ public class LogEntryListFragment extends Fragment {
 
 
 
-        mViewModel.getLogbookEntries(getArguments().getInt("logbook_id")).observe(getActivity(), new Observer<List<LogbookEntries>>() {
+        mViewModel.findEntriesForLogbook(getArguments().getInt("logbook_id")).observe(getActivity(), new Observer<List<Entry>>() {
             @Override
-            public void onChanged(@Nullable List<LogbookEntries> logbookEntries) {
-
-
-                adapter.submitList(logbookEntries.get(0).entries);
+            public void onChanged(@Nullable List<Entry> entries) {
+                adapter.submitList(entries);
             }
         });
 

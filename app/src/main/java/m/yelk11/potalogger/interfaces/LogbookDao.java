@@ -72,11 +72,10 @@ public interface LogbookDao {
 
     // POJO
     @Transaction
-    @Query("SELECT * FROM logbook WHERE id = :logbookId")
-    LiveData<List<LogbookEntries>> getLogbookEntries(int logbookId);
-
-    @Transaction
     @Query("SELECT * FROM logbook")
     LiveData<List<LogbookEntries>> getLogbookEntries();
 
+
+    @Query("SELECT * FROM entry WHERE logbookId=:logbookId")
+    LiveData<List<Entry>> findEntriesForLogbook(int logbookId);
 }

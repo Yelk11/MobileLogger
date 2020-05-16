@@ -85,7 +85,11 @@ public class LogbookViewModel extends AndroidViewModel {
      *
      */
 
-    public LiveData<List<LogbookEntries>> getLogbookEntries(int id){
-        return mRepository.getLogbookEntries(id);
+    public LiveData<List<LogbookEntries>> getLogbookEntries(){
+        return mRepository.getLogbookEntries();
+    }
+
+    public LiveData<List<Entry>> findEntriesForLogbook(int id){
+        return mRepository.findEntriesForLogbook(id);
     }
 }

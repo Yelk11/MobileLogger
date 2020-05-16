@@ -187,15 +187,17 @@ public class LogbookRepository {
      *
      */
 
-    public LiveData<List<LogbookEntries>> getLogbookEntries(int id)
-    {
-        return logbookDao.getLogbookEntries(id);
-    }
-
     public LiveData<List<LogbookEntries>> getLogbookEntries()
     {
         return logbookDao.getLogbookEntries();
     }
+
+    public LiveData<List<Entry>> findEntriesForLogbook(int id)
+    {
+        return logbookDao.findEntriesForLogbook(id);
+    }
+
+
 
 
 }

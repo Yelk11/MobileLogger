@@ -32,8 +32,8 @@ public class DatabaseHelper {
     }
 
 
-    public LiveData<List<LogbookEntries>> getLogbookEntries(int id) {
-        return logbookDao.getLogbookEntries(id);
+    public LiveData<List<LogbookEntries>> getLogbookEntries() {
+        return logbookDao.getLogbookEntries();
     }
 
 }
