@@ -48,7 +48,8 @@
         tools:layout="@layout/log_entry_fragment">
         <action
             android:id="@+id/action_logEntryFragment_to_logEntryListFragment"
-            app:destination="@id/logEntryListFragment" />
+            app:destination="@id/logEntryListFragment"
+            app:popUpTo="@id/logEntryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/logbookSettings"
