@@ -20,7 +20,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
 
     private OnItemClickListener listener;
 
-    private List<Entry> entries = new ArrayList<Entry>();
+
 
     public LogEntryListAdapter() {
         super(DIFF_CALLBACK);
@@ -34,7 +34,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
         }
         @Override
         public boolean areContentsTheSame(Entry oldItem, Entry newItem) {
-            return oldItem.getTitle().equals(newItem.getTitle());
+            return oldItem.getmCallsignTx().equals(newItem.getmCallsignTx());
         }
     };
     @NonNull
@@ -48,7 +48,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
     public void onBindViewHolder(@NonNull LogEntryListAdapter.EntryHolder holder, int position) {
 
         Entry currentEntry = getItem(position);
-        holder.callsign.setText(currentEntry.getTitle());
+        holder.callsign.setText(currentEntry.getmCallsignTx());
     }
 
 

@@ -11,7 +11,7 @@ import m.yelk11.potalogger.dbc.entity.Entry;
 import m.yelk11.potalogger.dbc.entity.Logbook;
 import m.yelk11.potalogger.interfaces.LogbookDao;
 
-@Database(entities = {Logbook.class, Entry.class}, version = 1)
+@Database(entities = {Logbook.class, Entry.class}, version = 2)
 public abstract class LogBookDatabase extends RoomDatabase {
     private static LogBookDatabase instance;
 

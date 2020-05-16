@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/logEntryFragment"
-        android:name="m.yelk11.potalogger.ui.fragments.LogEntryFragment"
+        android:name="m.yelk11.potalogger.ui.fragments.NewLogEntryFragment"
         android:label="LogEntryFragment"
         tools:layout="@layout/log_entry_fragment">
         <action

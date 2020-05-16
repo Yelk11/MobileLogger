@@ -91,7 +91,7 @@ public class LogbookListFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                //mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
+                mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getActivity(), "Log deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);

@@ -21,14 +21,14 @@ import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.dbc.entity.Entry;
 import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
 
-public class LogEntryFragment extends Fragment {
+public class NewLogEntryFragment extends Fragment {
 
     private LogbookViewModel mViewModel;
     private NavController navController;
 
 
-    public static LogEntryFragment newInstance() {
-        return new LogEntryFragment();
+    public static NewLogEntryFragment newInstance() {
+        return new NewLogEntryFragment();
     }
 
     @Override
@@ -60,9 +60,17 @@ public class LogEntryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Entry entry = new Entry();
-                entry.setLogbookId(0);
-                entry.setTitle("Title");
-                entry.setCallsign("Callsign");
+                entry.setLogbookId(getArguments().getInt("logbook_id"));
+                entry.setmDate(date.getText().toString());
+                entry.setmTime(time.getText().toString());
+                entry.setmFrequency(frequency.getText().toString());
+                entry.setmMode(mode.getText().toString());
+                entry.setmCallsignRx(callsignRx.getText().toString());
+                entry.setmCallsignTx(callsignTx.getText().toString());
+                entry.setmSignalReportRx(signalRx.getText().toString());
+                entry.setmSignalReportTx(signalTx.getText().toString());
+                entry.setmGridsquareRx(gridsquareRx.getText().toString());
+                entry.setmGridsquareTx(gridsquareTx.getText().toString());
 
 
                 mViewModel.insert(entry);
@@ -79,10 +87,6 @@ public class LogEntryFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
-
-
-
-
     }
 
 }

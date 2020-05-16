@@ -60,17 +60,9 @@ public class LogEntryListFragment extends Fragment {
 
                 Log.d("LOOK", "Logbook id: " + Integer.toString(getArguments().getInt("logbook_id")));
 
-
-                Entry newEntry = new Entry();
-                newEntry.setLogbookId(getArguments().getInt("logbook_id"));
-                newEntry.setCallsign("callsign");
-                newEntry.setTitle("TItle");
-
-                mViewModel.insert(newEntry);
-
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
-//                navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment, bundle);
+                Bundle bundle = new Bundle();
+                bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
+                navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment, bundle);
 
             }
         });
@@ -118,6 +110,10 @@ public class LogEntryListFragment extends Fragment {
         adapter.setOnItemClickListener(new LogEntryListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Entry entries) {
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
+                navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment, bundle);
 
 
                 Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
