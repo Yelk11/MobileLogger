@@ -1,9 +1,7 @@
 package m.yelk11.potalogger.ui.fragments;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,18 +18,17 @@ import android.widget.EditText;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.dbc.Entry;
-import m.yelk11.potalogger.ui.viewmodel.EntryVM;
-import m.yelk11.potalogger.ui.viewmodel.LogbookVM;
+import m.yelk11.potalogger.dbc.entity.Entry;
+import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
 
-public class LogEntryFragment extends Fragment {
+public class NewLogEntryFragment extends Fragment {
 
-    private EntryVM mViewModel;
+    private LogbookViewModel mViewModel;
     private NavController navController;
 
 
-    public static LogEntryFragment newInstance() {
-        return new LogEntryFragment();
+    public static NewLogEntryFragment newInstance() {
+        return new NewLogEntryFragment();
     }
 
     @Override
@@ -62,17 +59,25 @@ public class LogEntryFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Entry entry = new Entry(0,"LogEntryFragmentLine65",
-                        "","","", "","","",
-                        "",frequency.getText().toString(),"",
-                        gridsquareRx.getText().toString(),"","",
-                        mode.getText().toString(),"","",
-                        "",date.getText().toString(),signalRx.getText().toString(),
-                        "","",signalTx.getText().toString());
+                Entry entry = new Entry();
+                entry.setLogbookId(getArguments().getInt("logbook_id"));
+                entry.setmDate(date.getText().toString());
+                entry.setmTime(time.getText().toString());
+                entry.setmFrequency(frequency.getText().toString());
+                entry.setmMode(mode.getText().toString());
+                entry.setmCallsignRx(callsignRx.getText().toString());
+                entry.setmCallsignTx(callsignTx.getText().toString());
+                entry.setmSignalReportRx(signalRx.getText().toString());
+                entry.setmSignalReportTx(signalTx.getText().toString());
+                entry.setmGridsquareRx(gridsquareRx.getText().toString());
+                entry.setmGridsquareTx(gridsquareTx.getText().toString());
+
 
                 mViewModel.insert(entry);
 
-                navController.navigate(R.id.action_logEntryFragment_to_logEntryListFragment);
+                Bundle bundle = new Bundle();
+                bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
+                navController.navigate(R.id.action_logEntryFragment_to_logEntryListFragment, bundle);
             }
         });
 
@@ -81,11 +86,7 @@ public class LogEntryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(EntryVM.class);
-
-
-
-
+        mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
     }
 
 }

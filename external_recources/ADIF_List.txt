@@ -1,148 +1,148 @@
-ADDRESS,,
-ADDRESS_INTL,
-AGE,
-A_INDEX,
-ANT_AZ,
-ANT_EL,
-ANT_PATH,
-ARRL_SECT,
-AWARD_SUBMITTED,
-AWARD_GRANTED,
-BAND,
-BAND_RX,
-CALL,
-CHECK,
-CLASS,
-CLUBLOG_QSO_UPLOAD_DATE,
-CLUBLOG_QSO_UPLOAD_STATUS,
-CNTY,
-COMMENT,
-COMMENT_INTL,
-CONT,
-CONTACTED_OP,
-CONTEST_ID,
-COUNTRY,
-COUNTRY_INTL,
-CQZ,
-CREDIT_SUBMITTED,
-CREDIT_GRANTED,
-DARC_DOK,
-EQSL_QSLSDATE,
-EQSL_QSL_RCVD,
-EQSL_QSL_SENT,
-FISTS,
-FISTS_CC,
-FORCE_INIT,
-FREQ,
-FREQ_RX,
-GRIDSQUARE,
-GUEST_OP,
-HRDLOG_QSO_UPLOAD_DATE,
-HRDLOG_QSO_UPLOAD_STATUS,
-IOTA,
-IOTA_ISLAND_ID,
-ITUZ,
-K_INDEX,
-LAT,
-LON,
-LOTW_QSLRDATE,
-LOTW_QSLSDATE,
-LOTW_QSL_RCVD,
-LOTW_QSL_SENT,
-MAX_BURSTS,
-MODE,
-MS_SHOWER,
-MY_ANTENNA,
-MY_ANTENNA_INTL,
-MY_CITY,
-MY_CITY_INTL,
-MY_CNTY,
-MY_COUNTRY,
-MY_COUNTRY_INTL,
-MY_CQ_ZONE,
-MY_DXCC,
-MY_FISTS,
-MY_GRIDSQUARE,
-MY_IOTA,
-MY_IOTA_ISLAND_ID,
-MY_ITU_ZONE,
-MY_LAT,
-MY_LON,
-MY_NAME,
-MY_NAME_INTL,
-MY_POSTAL_CODE,
-MY_POSTAL_CODE_INTL,
-MY_RIG,
-MY_RIG_INTL,
-MY_SIG,
-MY_SIG_INTL,
-MY_SIG_INFO,
-MY_SIG_INFO_INTL,
-MY_SOTA_REF,
-MY_STATE,
-MY_STREET,
-MY_STREET_INTL,
-MY_USACA_COUNTIES,
-MY_VUCC_GRIDS,
-NAME,
-NAME_INTL,
-NOTES,
-NOTES_INTL,
-NR_BURSTS,
-NR_PINGS,
-OPERATOR,
-OWNER_CALLSIGN,
-PFX,
-PRECEDENCE,
-PROP_MODE,
-PUBLIC_KEY,
-QRZCOM_QSO_UPLOAD_DATE,
-QRZCOM_QSO_UPLOAD_STATUS,
-QSLMSG,
-QSLMSG_INTL,
-QSLRDATE,
-QSLSDATE,
-QSL_RCVD,
-QSL_RCVD_VIA,
-QSL_SENT,
-QSL_SENT_VIA,
-QSL_VIA,
-QSO_COMPLETE,
-QSO_DATE,
-QSO_DATE_OFF,
-QSO_RANDOM,
-QTH,
-QTH_INTL,
-REGION,
-RIG,
-RIG_INTL,
-RST_RCVD,
-RST_SENT,
-RX_PWR,
-SAT_MODE,
-SAT_NAME,
-SFI,
-SIG,
-SIG_INTL,
-SIG_INFO,
-SIG_INFO_INTL,
-SILENT_KEY,
-SKCC,
-SOTA_REF,
-SRX,
-SRX_STRING,
-STATE,
-STATION_CALLSIGN,
-STX,
-STX_STRING,
-SUBMODE,
-SWL,
-TEN_TEN,
-TIME_OFF,
-TIME_ON,
-TX_PWR,
-UKSMG,
-USACA_COUNTIES,
-VE_PROV,
-VUCC_GRIDS,
-WEB,
+public String address;
+public String address_intl;
+public String age;
+public String a_index;
+public String ant_az;
+public String ant_el;
+public String ant_path;
+public String arrl_sect;
+public String award_submitted;
+public String award_granted;
+public String band;
+public String band_rx;
+public String call;
+public String check;
+public String class;
+public String clublog_qso_upload_date;
+public String clublog_qso_upload_status;
+public String cnty;
+public String comment;
+public String comment_intl;
+public String cont;
+public String contacted_op;
+public String contest_id;
+public String country;
+public String country_intl;
+public String cqz;
+public String credit_submitted;
+public String credit_granted;
+public String darc_dok;
+public String eqsl_qslsdate;
+public String eqsl_qsl_rcvd;
+public String eqsl_qsl_sent;
+public String fists;
+public String fists_cc;
+public String force_init;
+public String freq;
+public String freq_rx;
+public String gridsquare;
+public String guest_op;
+public String hrdlog_qso_upload_date;
+public String hrdlog_qso_upload_status;
+public String iota;
+public String iota_island_id;
+public String ituz;
+public String k_index;
+public String lat;
+public String lon;
+public String lotw_qslrdate;
+public String lotw_qslsdate;
+public String lotw_qsl_rcvd;
+public String lotw_qsl_sent;
+public String max_bursts;
+public String mode;
+public String ms_shower;
+public String my_antenna;
+public String my_antenna_intl;
+public String my_city;
+public String my_city_intl;
+public String my_cnty;
+public String my_country;
+public String my_country_intl;
+public String my_cq_zone;
+public String my_dxcc;
+public String my_fists;
+public String my_gridsquare;
+public String my_iota;
+public String my_iota_island_id;
+public String my_itu_zone;
+public String my_lat;
+public String my_lon;
+public String my_name;
+public String my_name_intl;
+public String my_postal_code;
+public String my_postal_code_intl;
+public String my_rig;
+public String my_rig_intl;
+public String my_sig;
+public String my_sig_intl;
+public String my_sig_info;
+public String my_sig_info_intl;
+public String my_sota_ref;
+public String my_state;
+public String my_street;
+public String my_street_intl;
+public String my_usaca_counties;
+public String my_vucc_grids;
+public String name;
+public String name_intl;
+public String notes;
+public String notes_intl;
+public String nr_bursts;
+public String nr_pings;
+public String operator;
+public String owner_callsign;
+public String pfx;
+public String precedence;
+public String prop_mode;
+public String public_key;
+public String qrzcom_qso_upload_date;
+public String qrzcom_qso_upload_status;
+public String qslmsg;
+public String qslmsg_intl;
+public String qslrdate;
+public String qslsdate;
+public String qsl_rcvd;
+public String qsl_rcvd_via;
+public String qsl_sent;
+public String qsl_sent_via;
+public String qsl_via;
+public String qso_complete;
+public String qso_date;
+public String qso_date_off;
+public String qso_random;
+public String qth;
+public String qth_intl;
+public String region;
+public String rig;
+public String rig_intl;
+public String rst_rcvd;
+public String rst_sent;
+public String rx_pwr;
+public String sat_mode;
+public String sat_name;
+public String sfi;
+public String sig;
+public String sig_intl;
+public String sig_info;
+public String sig_info_intl;
+public String silent_key;
+public String skcc;
+public String sota_ref;
+public String srx;
+public String srx_string;
+public String state;
+public String station_callsign;
+public String stx;
+public String stx_string;
+public String submode;
+public String swl;
+public String ten_ten;
+public String time_off;
+public String time_on;
+public String tx_pwr;
+public String uksmg;
+public String usaca_counties;
+public String ve_prov;
+public String vucc_grids;
+public String web;

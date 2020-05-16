@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.dbc.Entry;
+import m.yelk11.potalogger.dbc.entity.Entry;
 
 public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.EntryHolder> {
 
     private OnItemClickListener listener;
 
-    private List<Entry> entries = new ArrayList<Entry>();
+
 
     public LogEntryListAdapter() {
         super(DIFF_CALLBACK);
@@ -35,7 +34,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
         }
         @Override
         public boolean areContentsTheSame(Entry oldItem, Entry newItem) {
-            return oldItem.getEntryName().equals(newItem.getEntryName());
+            return oldItem.getmCallsignTx().equals(newItem.getmCallsignTx());
         }
     };
     @NonNull
@@ -49,7 +48,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
     public void onBindViewHolder(@NonNull LogEntryListAdapter.EntryHolder holder, int position) {
 
         Entry currentEntry = getItem(position);
-        holder.title.setText(currentEntry.getEntryName());
+        holder.callsign.setText(currentEntry.getmCallsignTx());
     }
 
 
@@ -63,13 +62,13 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
     }
 
     class EntryHolder extends RecyclerView.ViewHolder {
-        private TextView title;
+        private TextView callsign;
 
 
         public EntryHolder(View itemView) {
             super(itemView);
 
-            title = itemView.findViewById(R.id.rowTextView);
+            callsign = itemView.findViewById(R.id.entry_callsign);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -83,7 +82,7 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
         }
     }
     public interface OnItemClickListener {
-        void onItemClick(Entry logbookWithEntries);
+        void onItemClick(Entry entry);
     }
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
