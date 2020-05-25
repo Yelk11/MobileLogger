@@ -27,6 +27,7 @@ import java.util.List;
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.adapters.LogbookListAdapter;
 import m.yelk11.potalogger.dbc.entity.Logbook;
+import m.yelk11.potalogger.repository.LogbookIdSingleton;
 import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
 
 
@@ -99,10 +100,10 @@ public class LogbookListFragment extends Fragment {
         adapter.setOnItemClickListener(new LogbookListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Logbook logbook) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("logbook_id", logbook.getId());
-                navController.navigate(R.id.action_logbookListFragment_to_logEntryListFragment, bundle);
-                Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
+                LogbookIdSingleton logbookId = LogbookIdSingleton.getInstance();
+                logbookId.setWorkingLogbookId(logbook.getId());
+                navController.navigate(R.id.action_logbookListFragment_to_logEntryListFragment);
+                Toast.makeText(getActivity(), "You clicked Logbook: " + logbook.getId(), Toast.LENGTH_SHORT).show();
             }
         });
     }

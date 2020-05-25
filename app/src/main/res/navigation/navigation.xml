@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/logEntryListFragment"
         android:name="m.yelk11.potalogger.ui.fragments.LogEntryListFragment"
-        android:label="logbook_list_fragment"
-        tools:layout="@layout/logbook_list_fragment" >
+        android:label="log_entry_list_fragment"
+        tools:layout="@layout/log_entry_list_fragment" >
         <action
             android:id="@+id/action_logEntryListFragment_to_logEntryFragment"
             app:destination="@id/logEntryFragment" />
@@ -49,7 +49,8 @@
         <action
             android:id="@+id/action_logEntryFragment_to_logEntryListFragment"
             app:destination="@id/logEntryListFragment"
-            app:popUpTo="@id/logEntryListFragment" />
+            app:popUpTo="@id/logEntryListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/logbookSettings"
