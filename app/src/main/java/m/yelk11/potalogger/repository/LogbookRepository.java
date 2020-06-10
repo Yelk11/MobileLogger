@@ -178,15 +178,12 @@ public class LogbookRepository {
             return null;
         }
     }
-
-
     /**
      *
      *        LOGBOOK_ENTRIES
      *
      *
      */
-
     public LiveData<List<LogbookEntries>> getLogbookEntries()
     {
         return logbookDao.getLogbookEntries();
@@ -196,8 +193,4 @@ public class LogbookRepository {
     {
         return logbookDao.findEntriesForLogbook(id);
     }
-
-
-
-
 }

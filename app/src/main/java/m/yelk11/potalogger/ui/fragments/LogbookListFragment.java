@@ -27,6 +27,7 @@ import java.util.List;
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.adapters.LogbookListAdapter;
 import m.yelk11.potalogger.dbc.entity.Logbook;
+import m.yelk11.potalogger.fileio.AdifHandler;
 import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
 
 
@@ -85,14 +86,20 @@ public class LogbookListFragment extends Fragment {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
                 return false;
             }
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getActivity(), "Log deleted", Toast.LENGTH_SHORT).show();
+                AdifHandler generator = new AdifHandler();
+
+                generator.writeAdif(mViewModel.findEntriesForLogbook(
+                        adapter.getNoteAt(viewHolder.getAdapterPosition()).id).getValue(),
+                        getContext());
+                //mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(getActivity(), "Adif file created", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
@@ -101,30 +108,11 @@ public class LogbookListFragment extends Fragment {
             public void onItemClick(Logbook logbook) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("logbook_id", logbook.getId());
-                navController.navigate(R.id.action_logbookListFragment_to_logEntryListFragment, bundle);
-                Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
+                navController.navigate(R.id.action_logbookListFragment_to_logEntryListFragment,
+                        bundle);
+                Toast.makeText(getActivity(), "You clicked something",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
-
-
-    public void save() {
-
-/*
-        AdiWriter writer = new AdiWriter();
-        writer.append("book name", true);
-
-        Adif3Record record = new Adif3Record();
-
-        for  (LOOP THROUGH ALL RECORDS ) {
-            writer.append(record);
-        }
-        writer.toString(); // -> to some output
-
-        */
-    }
-
-
 }
