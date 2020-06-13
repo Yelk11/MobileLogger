@@ -85,8 +85,12 @@ public class LogbookRepository {
             return null;
         }
     }
+
+
     private static class DeleteLogbookAsyncTask extends AsyncTask<Logbook, Void, Void> {
         private LogbookDao logbookDao;
+
+        
         private DeleteLogbookAsyncTask(LogbookDao logbookDao) {
             this.logbookDao = logbookDao;
         }
