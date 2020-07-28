@@ -94,7 +94,7 @@ public class LogbookListFragment extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 AdifHandler generator = new AdifHandler();
-
+                Log.d("LOOK", String.valueOf(mViewModel.findEntriesForLogbook(1).getValue()));
                 generator.writeAdif(mViewModel.findEntriesForLogbook(
                         adapter.getNoteAt(viewHolder.getAdapterPosition()).id).getValue(),
                         getContext());
