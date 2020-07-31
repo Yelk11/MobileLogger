@@ -25,14 +25,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.adapters.LogbookListAdapter;
-import m.yelk11.potalogger.dbc.entity.Logbook;
-import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
+import m.yelk11.potalogger.adapters.BookListAdapter;
+import m.yelk11.potalogger.dbc.entity.Book;
+import m.yelk11.potalogger.ui.viewmodel.BookViewModel;
 
 
 public class LogbookListFragment extends Fragment {
 
-    private LogbookViewModel mViewModel;
+    private BookViewModel mViewModel;
     private NavController navController;
 
     public static LogbookListFragment newInstance() {
@@ -65,19 +65,19 @@ public class LogbookListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final LogbookListAdapter adapter = new LogbookListAdapter();
+        final BookListAdapter adapter = new BookListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.logbook_list);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
-        mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
-        mViewModel.getAllLogbooks().observe(getViewLifecycleOwner(), new Observer<List<Logbook>>() {
+        mViewModel = ViewModelProviders.of(this).get(BookViewModel.class);
+        mViewModel.getAllLogbooks().observe(getViewLifecycleOwner(), new Observer<List<Book>>() {
             @Override
-            public void onChanged(@Nullable List<Logbook> logbook) {
+            public void onChanged(@Nullable List<Book> book) {
                 Log.d("LOOK", "it happened");
-                adapter.submitList(logbook);
+                adapter.submitList(book);
             }
         });
 
@@ -91,16 +91,19 @@ public class LogbookListFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
                 mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
+
                 Toast.makeText(getActivity(), "Log deleted", Toast.LENGTH_SHORT).show();
+
             }
         }).attachToRecyclerView(recyclerView);
 
-        adapter.setOnItemClickListener(new LogbookListAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new BookListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Logbook logbook) {
+            public void onItemClick(Book book) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("logbook_id", logbook.getId());
+                bundle.putInt("logbook_id", book.getId());
                 navController.navigate(R.id.action_logbookListFragment_to_logEntryListFragment, bundle);
                 Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
             }

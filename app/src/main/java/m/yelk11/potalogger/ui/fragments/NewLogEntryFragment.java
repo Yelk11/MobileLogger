@@ -19,11 +19,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.dbc.entity.Entry;
-import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
+import m.yelk11.potalogger.ui.viewmodel.BookViewModel;
 
 public class NewLogEntryFragment extends Fragment {
 
-    private LogbookViewModel mViewModel;
+    private BookViewModel mViewModel;
     private NavController navController;
 
 
@@ -86,7 +86,7 @@ public class NewLogEntryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(BookViewModel.class);
     }
 
 }

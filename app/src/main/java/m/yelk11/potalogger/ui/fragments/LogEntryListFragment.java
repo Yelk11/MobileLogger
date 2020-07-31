@@ -20,19 +20,16 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.adapters.LogEntryListAdapter;
+import m.yelk11.potalogger.adapters.EntryListAdapter;
 import m.yelk11.potalogger.dbc.entity.Entry;
-import m.yelk11.potalogger.dbc.entity.Logbook;
-import m.yelk11.potalogger.dbc.entity.LogbookEntries;
-import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
+import m.yelk11.potalogger.ui.viewmodel.BookViewModel;
 
 public class LogEntryListFragment extends Fragment {
 
-    private LogbookViewModel mViewModel;
+    private BookViewModel mViewModel;
     private NavController navController;
 
     public static LogEntryListFragment newInstance() {
@@ -71,10 +68,10 @@ public class LogEntryListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(BookViewModel.class);
 
 
-        final LogEntryListAdapter adapter = new LogEntryListAdapter();
+        final EntryListAdapter adapter = new EntryListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.log_entry_list_recyclerview);
         recyclerView.setAdapter(adapter);
@@ -107,7 +104,7 @@ public class LogEntryListFragment extends Fragment {
         }).attachToRecyclerView(recyclerView);
 
 
-        adapter.setOnItemClickListener(new LogEntryListAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new EntryListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Entry entries) {
 

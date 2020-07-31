@@ -12,23 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.dbc.entity.Logbook;
+import m.yelk11.potalogger.dbc.entity.Book;
 
 
-public class LogbookListAdapter extends ListAdapter<Logbook, LogbookListAdapter.LogbookHolder> {
+public class BookListAdapter extends ListAdapter<Book, BookListAdapter.LogbookHolder> {
 
     private OnItemClickListener listener;
 
-    public LogbookListAdapter() {
+    public BookListAdapter() {
         super(DIFF_CALLBACK);
     }
-    private static final DiffUtil.ItemCallback<Logbook> DIFF_CALLBACK = new DiffUtil.ItemCallback<Logbook>() {
+    private static final DiffUtil.ItemCallback<Book> DIFF_CALLBACK = new DiffUtil.ItemCallback<Book>() {
         @Override
-        public boolean areItemsTheSame(Logbook oldItem, Logbook newItem) {
+        public boolean areItemsTheSame(Book oldItem, Book newItem) {
             return oldItem.getId() == newItem.getId();
         }
         @Override
-        public boolean areContentsTheSame(Logbook oldItem, Logbook newItem) {
+        public boolean areContentsTheSame(Book oldItem, Book newItem) {
             return oldItem.getTitle().equals(newItem.getTitle());
         }
     };
@@ -43,11 +43,11 @@ public class LogbookListAdapter extends ListAdapter<Logbook, LogbookListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull LogbookHolder holder, int position) {
-        Logbook currentLogbook = getItem(position);
-        holder.title.setText(currentLogbook.getTitle());
+        Book currentBook = getItem(position);
+        holder.title.setText(currentBook.getTitle());
     }
 
-    public Logbook getNoteAt(int position) {
+    public Book getNoteAt(int position) {
         return getItem(position);
     }
 
@@ -75,7 +75,7 @@ public class LogbookListAdapter extends ListAdapter<Logbook, LogbookListAdapter.
         }
     }
     public interface OnItemClickListener {
-        void onItemClick(Logbook logbook);
+        void onItemClick(Book book);
     }
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;

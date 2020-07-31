@@ -2,10 +2,10 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ab66cdcad2bee845dff6032ab5c3aef9",
+    "identityHash": "caf35af05fde16c1a2baf482e29f2bf9",
     "entities": [
       {
-        "tableName": "Logbook",
+        "tableName": "Book",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `callsign` TEXT)",
         "fields": [
           {
@@ -38,7 +38,7 @@
       },
       {
         "tableName": "Entry",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `callsign` TEXT, `logbookId` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `logbookId` INTEGER NOT NULL, `mDate` TEXT, `mTime` TEXT, `mFrequency` TEXT, `mMode` TEXT, `mCallsignTx` TEXT, `mCallsignRx` TEXT, `mPowerReportTx` TEXT, `mPowerReportRx` TEXT, `mSignalReportTx` TEXT, `mSignalReportRx` TEXT, `mGridsquareTx` TEXT, `mGridsquareRx` TEXT, `mCommentTx` TEXT, `mCommentRx` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -47,22 +47,94 @@
             "notNull": true
           },
           {
-            "fieldPath": "title",
-            "columnName": "title",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "callsign",
-            "columnName": "callsign",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "logbookId",
             "columnName": "logbookId",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "mDate",
+            "columnName": "mDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mTime",
+            "columnName": "mTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mFrequency",
+            "columnName": "mFrequency",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mMode",
+            "columnName": "mMode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mCallsignTx",
+            "columnName": "mCallsignTx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mCallsignRx",
+            "columnName": "mCallsignRx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mPowerReportTx",
+            "columnName": "mPowerReportTx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mPowerReportRx",
+            "columnName": "mPowerReportRx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mSignalReportTx",
+            "columnName": "mSignalReportTx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mSignalReportRx",
+            "columnName": "mSignalReportRx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mGridsquareTx",
+            "columnName": "mGridsquareTx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mGridsquareRx",
+            "columnName": "mGridsquareRx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mCommentTx",
+            "columnName": "mCommentTx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mCommentRx",
+            "columnName": "mCommentRx",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -78,7 +150,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ab66cdcad2bee845dff6032ab5c3aef9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'caf35af05fde16c1a2baf482e29f2bf9')"
     ]
   }
 }
