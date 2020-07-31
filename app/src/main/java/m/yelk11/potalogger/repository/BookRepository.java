@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import m.yelk11.potalogger.dbc.BookDatabaseHelper;
 import m.yelk11.potalogger.dbc.LogBookDatabase;
 import m.yelk11.potalogger.dbc.entity.Book;
 import m.yelk11.potalogger.interfaces.BookDao;
@@ -16,14 +15,14 @@ import m.yelk11.potalogger.interfaces.BookDao;
 public class BookRepository {
 
     private BookDao bookDao;
-    private BookDatabaseHelper bookDatabaseHelper;
+
 
     private LiveData<List<Book>> allBooks;
 
 
     public BookRepository(Application application){
         LogBookDatabase db = LogBookDatabase.getInstance(application);
-        bookDatabaseHelper = new BookDatabaseHelper(db);
+
         bookDao = db.bookDao();
     }
 
