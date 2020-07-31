@@ -16,13 +16,11 @@ public class EntryRepository {
 
     private EntryDao entryDao;
 
-
-    private LiveData<List<Book>> allLogbooks;
-
     public EntryRepository(Application application){
         LogBookDatabase db = LogBookDatabase.getInstance(application);
 
         entryDao = db.entryDao();
+
     }
 
     public void insert(Entry entry) {
@@ -37,6 +35,21 @@ public class EntryRepository {
     public void deleteAllEntries() {
         new DeleteAllEntriesAsyncTask(entryDao).execute();
     }
+
+
+    public LiveData<List<Entry>> getBookEntries(int bookId){
+        return entryDao.getBookEntries(bookId);
+    }
+
+
+    public LiveData<Entry> getEntry(int entryId){
+        return entryDao.getEntry(entryId);
+    }
+
+    public void deleteBookEntries(int bookId){
+        entryDao.deleteLogEntries(bookId);
+    }
+
 
     public LiveData<List<Entry>> getAllEntries() {
         return entryDao.getAllEntries();
@@ -89,4 +102,6 @@ public class EntryRepository {
             return null;
         }
     }
+
+
 }

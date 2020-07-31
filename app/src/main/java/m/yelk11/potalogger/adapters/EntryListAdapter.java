@@ -21,8 +21,6 @@ public class EntryListAdapter extends ListAdapter<Entry, EntryListAdapter.EntryH
 
     public EntryListAdapter() {
         super(DIFF_CALLBACK);
-
-
     }
     private static final DiffUtil.ItemCallback<Entry> DIFF_CALLBACK = new DiffUtil.ItemCallback<Entry>() {
         @Override

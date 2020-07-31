@@ -6,7 +6,7 @@
     app:startDestination="@id/logbookListFragment">
     <fragment
         android:id="@+id/logEntryListFragment"
-        android:name="m.yelk11.potalogger.ui.fragments.LogEntryListFragment"
+        android:name="m.yelk11.potalogger.ui.fragments.EntryListFragment"
         android:label="logbook_list_fragment"
         tools:layout="@layout/logbook_list_fragment" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/logbookListFragment"
-        android:name="m.yelk11.potalogger.ui.fragments.LogbookListFragment"
+        android:name="m.yelk11.potalogger.ui.fragments.BookListFragment"
         android:label="logbook_list"
         tools:layout="@layout/logbook_list_fragment">
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/newLogbookFragment"
-        android:name="m.yelk11.potalogger.ui.fragments.NewLogbookFragment"
+        android:name="m.yelk11.potalogger.ui.fragments.NewBookFragment"
         android:label="NewLogbookFragment"
         tools:layout="@layout/new_logbook_fragment">
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/logEntryFragment"
-        android:name="m.yelk11.potalogger.ui.fragments.NewLogEntryFragment"
+        android:name="m.yelk11.potalogger.ui.fragments.NewEntryFragment"
         android:label="LogEntryFragment"
         tools:layout="@layout/log_entry_fragment">
         <action

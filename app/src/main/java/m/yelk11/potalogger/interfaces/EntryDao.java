@@ -30,11 +30,15 @@ public interface EntryDao {
 
     @Transaction
     @Query("SELECT * FROM entry WHERE id = :entryId")
-    List<Entry> getEntry(int entryId);
+    LiveData<Entry> getEntry(int entryId);
 
     @Transaction
     @Query("SELECT * FROM entry WHERE logbookId = :logbookId")
-    List<Entry> getBookEntries(int logbookId);
+    LiveData<List<Entry>> getBookEntries(int logbookId);
+
+    @Transaction
+    @Query("DELETE FROM entry WHERE logbookId = :logbookId")
+    void deleteLogEntries(int logbookId);
 
     @Transaction
     @Query("DELETE FROM entry")

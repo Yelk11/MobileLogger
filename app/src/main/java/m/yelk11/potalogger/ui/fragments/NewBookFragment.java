@@ -20,14 +20,14 @@ import java.util.Locale;
 
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.dbc.entity.Book;
-import m.yelk11.potalogger.ui.viewmodel.BookViewModel;
+import m.yelk11.potalogger.ui.viewmodel.NewBookViewModel;
 
-public class NewLogbookFragment extends Fragment {
+public class NewBookFragment extends Fragment {
 
-    private BookViewModel mViewModel;
+    private NewBookViewModel mViewModel;
 
-    public static NewLogbookFragment newInstance() {
-        return new NewLogbookFragment();
+    public static NewBookFragment newInstance() {
+        return new NewBookFragment();
     }
 
     @Nullable
@@ -62,7 +62,7 @@ public class NewLogbookFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(BookViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(NewBookViewModel.class);
 
     }
 }
