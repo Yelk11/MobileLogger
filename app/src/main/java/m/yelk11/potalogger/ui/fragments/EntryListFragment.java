@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,7 +40,7 @@ public class EntryListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.log_entry_list_fragment, container, false);
+        return inflater.inflate(R.layout.entry_list_fragment, container, false);
     }
 
     @Override
@@ -74,15 +75,25 @@ public class EntryListFragment extends Fragment {
         final EntryListAdapter adapter = new EntryListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.log_entry_list_recyclerview);
+        TextView entryListEmpty = getView().findViewById(R.id.entry_list_empty);
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
 
+
         mViewModel.getAllBookEntries(getArguments().getInt("logbook_id")).observe(getActivity(), new Observer<List<Entry>>() {
             @Override
             public void onChanged(@Nullable List<Entry> entries) {
-                adapter.submitList(entries);
+                if(entries.isEmpty()){
+                    entryListEmpty.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                }else{
+                    entryListEmpty.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    adapter.submitList(entries);
+                }
             }
         });
 

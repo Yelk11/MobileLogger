@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,7 +44,7 @@ public class BookListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.logbook_list_fragment, container, false);
+        return inflater.inflate(R.layout.book_list_fragment, container, false);
     }
 
     @Override
@@ -68,6 +69,9 @@ public class BookListFragment extends Fragment {
         final BookListAdapter adapter = new BookListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.logbook_list);
+        TextView bookListEmpty = getView().findViewById(R.id.book_list_empty);
+
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
@@ -78,6 +82,15 @@ public class BookListFragment extends Fragment {
             public void onChanged(@Nullable List<Book> book) {
                 Log.d("LOOK", "it happened");
                 adapter.submitList(book);
+
+                if(book.isEmpty()){
+                    bookListEmpty.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                }else{
+                    bookListEmpty.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    adapter.submitList(book);
+                }
             }
         });
 
