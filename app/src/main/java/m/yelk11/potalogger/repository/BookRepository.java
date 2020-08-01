@@ -17,9 +17,6 @@ public class BookRepository {
     private BookDao bookDao;
 
 
-    private LiveData<List<Book>> allBooks;
-
-
     public BookRepository(Application application){
         LogBookDatabase db = LogBookDatabase.getInstance(application);
 
@@ -42,7 +39,7 @@ public class BookRepository {
     }
 
     public LiveData<List<Book>> getAllBooks() {
-        return allBooks;
+        return bookDao.getAllLogbooks();
     }
 
 

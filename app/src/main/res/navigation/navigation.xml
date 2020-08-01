@@ -16,6 +16,9 @@
             android:name="logId"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_logEntryListFragment_to_logbookListFragment"
+            app:destination="@id/logbookListFragment" />
     </fragment>
     <fragment
         android:id="@+id/logbookListFragment"

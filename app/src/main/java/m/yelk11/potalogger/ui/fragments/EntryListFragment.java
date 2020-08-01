@@ -1,5 +1,6 @@
 package m.yelk11.potalogger.ui.fragments;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -43,6 +44,21 @@ public class EntryListFragment extends Fragment {
         return inflater.inflate(R.layout.entry_list_fragment, container, false);
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+
+                navController.navigate(R.id.action_logEntryListFragment_to_logbookListFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+    }
+
+    
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

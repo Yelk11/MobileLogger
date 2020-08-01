@@ -1,5 +1,6 @@
 package m.yelk11.potalogger.ui.fragments;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -47,6 +48,8 @@ public class BookListFragment extends Fragment {
         return inflater.inflate(R.layout.book_list_fragment, container, false);
     }
 
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -82,15 +85,6 @@ public class BookListFragment extends Fragment {
             public void onChanged(@Nullable List<Book> book) {
                 Log.d("LOOK", "it happened");
                 adapter.submitList(book);
-
-                if(book.isEmpty()){
-                    bookListEmpty.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.GONE);
-                }else{
-                    bookListEmpty.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    adapter.submitList(book);
-                }
             }
         });
 
