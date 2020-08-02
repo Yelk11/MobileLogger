@@ -21,10 +21,5 @@
         android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-    <TextView
-        android:id="@+id/book_list_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Add an Logbook" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

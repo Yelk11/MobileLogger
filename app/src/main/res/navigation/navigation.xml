@@ -41,8 +41,8 @@
         android:label="NewLogbookFragment"
         tools:layout="@layout/new_logbook_fragment">
         <action
-            android:id="@+id/action_newLogbookFragment_to_logEntryListFragment"
-            app:destination="@id/logEntryListFragment" />
+            android:id="@+id/action_newLogbookFragment_to_logbookListFragment"
+            app:destination="@id/logbookListFragment" />
     </fragment>
     <fragment
         android:id="@+id/logEntryFragment"

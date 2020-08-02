@@ -27,9 +27,6 @@ public class NewEntryFragment extends Fragment {
     private NavController navController;
 
 
-    public static NewEntryFragment newInstance() {
-        return new NewEntryFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

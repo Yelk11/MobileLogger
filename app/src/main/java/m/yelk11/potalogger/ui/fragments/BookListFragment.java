@@ -72,7 +72,7 @@ public class BookListFragment extends Fragment {
         final BookListAdapter adapter = new BookListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.logbook_list);
-        TextView bookListEmpty = getView().findViewById(R.id.book_list_empty);
+
 
 
         recyclerView.setAdapter(adapter);
@@ -83,7 +83,6 @@ public class BookListFragment extends Fragment {
         mViewModel.getAllLogbooks().observe(getViewLifecycleOwner(), new Observer<List<Book>>() {
             @Override
             public void onChanged(@Nullable List<Book> book) {
-                Log.d("LOOK", "it happened");
                 adapter.submitList(book);
             }
         });
@@ -112,7 +111,7 @@ public class BookListFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt("logbook_id", book.getId());
                 navController.navigate(R.id.action_logbookListFragment_to_logEntryListFragment, bundle);
-                Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -122,18 +121,7 @@ public class BookListFragment extends Fragment {
 
     public void save() {
 
-/*
-        AdiWriter writer = new AdiWriter();
-        writer.append("book name", true);
 
-        Adif3Record record = new Adif3Record();
-
-        for  (LOOP THROUGH ALL RECORDS ) {
-            writer.append(record);
-        }
-        writer.toString(); // -> to some output
-
-        */
     }
 
 

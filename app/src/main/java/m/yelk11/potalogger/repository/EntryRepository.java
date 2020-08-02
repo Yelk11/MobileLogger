@@ -8,7 +8,8 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import m.yelk11.potalogger.dbc.LogBookDatabase;
-import m.yelk11.potalogger.dbc.entity.Book;
+
+
 import m.yelk11.potalogger.dbc.entity.Entry;
 import m.yelk11.potalogger.interfaces.EntryDao;
 
@@ -42,12 +43,12 @@ public class EntryRepository {
     }
 
 
-    public LiveData<Entry> getEntry(int entryId){
-        return entryDao.getEntry(entryId);
-    }
+//    public LiveData<Entry> getEntry(int entryId){
+//        return entryDao.getEntry(entryId);
+//    }
 
-    public void deleteBookEntries(int bookId){
-        entryDao.deleteLogEntries(bookId);
+    public void deleteBookEntries(int book){
+        new DeleteBookEntries(entryDao).execute(book);
     }
 
 
@@ -99,6 +100,19 @@ public class EntryRepository {
         @Override
         protected Void doInBackground(Void... voids) {
             EntryDao.deleteAllEntries();
+            return null;
+        }
+    }
+
+    private static class DeleteBookEntries extends AsyncTask<Integer, Void, Void> {
+        private EntryDao EntryDao;
+        private DeleteBookEntries(EntryDao EntryDao) {
+            this.EntryDao = EntryDao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            EntryDao.deleteLogEntries(integers[0]);
             return null;
         }
     }

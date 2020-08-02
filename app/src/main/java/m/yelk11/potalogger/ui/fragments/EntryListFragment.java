@@ -69,9 +69,6 @@ public class EntryListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Log.d("LOOK", "Logbook id: " + Integer.toString(getArguments().getInt("logbook_id")));
-
                 Bundle bundle = new Bundle();
                 bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
                 navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment, bundle);
@@ -89,7 +86,7 @@ public class EntryListFragment extends Fragment {
         final EntryListAdapter adapter = new EntryListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.log_entry_list_recyclerview);
-        TextView entryListEmpty = getView().findViewById(R.id.entry_list_empty);
+
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -100,14 +97,8 @@ public class EntryListFragment extends Fragment {
         mViewModel.getAllBookEntries(getArguments().getInt("logbook_id")).observe(getActivity(), new Observer<List<Entry>>() {
             @Override
             public void onChanged(@Nullable List<Entry> entries) {
-                if(entries.isEmpty()){
-                    entryListEmpty.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.GONE);
-                }else{
-                    entryListEmpty.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    adapter.submitList(entries);
-                }
+                adapter.submitList(entries);
+
             }
         });
 

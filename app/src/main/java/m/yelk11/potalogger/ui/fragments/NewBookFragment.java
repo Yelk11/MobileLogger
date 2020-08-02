@@ -26,9 +26,6 @@ public class NewBookFragment extends Fragment {
 
     private NewBookViewModel mViewModel;
 
-    public static NewBookFragment newInstance() {
-        return new NewBookFragment();
-    }
 
     @Nullable
     @Override
@@ -53,7 +50,7 @@ public class NewBookFragment extends Fragment {
                 String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                 mViewModel.insert(new Book(logbookName.getText().toString(),ownerCallsign.getText().toString()));
 
-                navController.navigate(R.id.action_newLogbookFragment_to_logEntryListFragment);
+                navController.navigate(R.id.action_newLogbookFragment_to_logbookListFragment);
             }
         });
 

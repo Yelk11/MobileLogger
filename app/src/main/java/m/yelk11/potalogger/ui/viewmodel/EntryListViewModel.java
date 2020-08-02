@@ -43,6 +43,7 @@ public class EntryListViewModel extends AndroidViewModel {
         return entryRepository.getAllEntries();
     }
     public LiveData<List<Entry>> getAllBookEntries(int bookId){
+        entryRepository.toString();
         return entryRepository.getBookEntries(bookId);
     }
 }

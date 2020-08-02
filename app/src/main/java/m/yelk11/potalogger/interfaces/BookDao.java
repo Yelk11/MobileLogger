@@ -38,6 +38,9 @@ public interface BookDao {
     @Query("SELECT * FROM Book")
     LiveData<List<Book>> getAllLogbooks();
 
+    @Transaction
+    @Query("SELECT * FROM Book ORDER BY ID DESC LIMIT 1")
+    Book getLastBook();
 
     @Query("SELECT * FROM entry WHERE logbookId=:logbookId")
     LiveData<List<Entry>> findEntriesForLogbook(int logbookId);
