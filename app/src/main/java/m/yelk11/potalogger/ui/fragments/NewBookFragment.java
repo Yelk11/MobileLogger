@@ -19,16 +19,13 @@ import java.util.Date;
 import java.util.Locale;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.dbc.entity.Logbook;
-import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
+import m.yelk11.potalogger.dbc.entity.Book;
+import m.yelk11.potalogger.ui.viewmodel.NewBookViewModel;
 
-public class NewLogbookFragment extends Fragment {
+public class NewBookFragment extends Fragment {
 
-    private LogbookViewModel mViewModel;
+    private NewBookViewModel mViewModel;
 
-    public static NewLogbookFragment newInstance() {
-        return new NewLogbookFragment();
-    }
 
     @Nullable
     @Override
@@ -51,9 +48,9 @@ public class NewLogbookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                mViewModel.insert(new Logbook(logbookName.getText().toString(),ownerCallsign.getText().toString()));
+                mViewModel.insert(new Book(logbookName.getText().toString(),ownerCallsign.getText().toString()));
 
-                navController.navigate(R.id.action_newLogbookFragment_to_logEntryListFragment);
+                navController.navigate(R.id.action_newLogbookFragment_to_logbookListFragment);
             }
         });
 
@@ -62,7 +59,7 @@ public class NewLogbookFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(NewBookViewModel.class);
 
     }
 }

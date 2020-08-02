@@ -1,13 +1,8 @@
 package m.yelk11.potalogger.dbc.entity;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
-import java.sql.Date;
-import java.sql.Time;
-import java.util.List;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -19,7 +14,7 @@ public class Entry {
     public int id;
 
     @ForeignKey
-            (entity = Logbook.class,
+            (entity = Book.class,
                     parentColumns = "id",
                     childColumns = "logbookId",
                     onDelete = CASCADE)

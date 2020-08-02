@@ -1,5 +1,6 @@
 package m.yelk11.potalogger.ui.fragments;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,26 +27,28 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.adapters.LogbookListAdapter;
-import m.yelk11.potalogger.dbc.entity.Logbook;
-import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
+import m.yelk11.potalogger.adapters.BookListAdapter;
+import m.yelk11.potalogger.dbc.entity.Book;
+import m.yelk11.potalogger.ui.viewmodel.BookListViewModel;
 
 
-public class LogbookListFragment extends Fragment {
+public class BookListFragment extends Fragment {
 
-    private LogbookViewModel mViewModel;
+    private BookListViewModel mViewModel;
     private NavController navController;
 
-    public static LogbookListFragment newInstance() {
-        return new LogbookListFragment();
+    public static BookListFragment newInstance() {
+        return new BookListFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.logbook_list_fragment, container, false);
+        return inflater.inflate(R.layout.book_list_fragment, container, false);
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -65,19 +69,21 @@ public class LogbookListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final LogbookListAdapter adapter = new LogbookListAdapter();
+        final BookListAdapter adapter = new BookListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.logbook_list);
+
+
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
-        mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
-        mViewModel.getAllLogbooks().observe(getViewLifecycleOwner(), new Observer<List<Logbook>>() {
+        mViewModel = ViewModelProviders.of(this).get(BookListViewModel.class);
+        mViewModel.getAllLogbooks().observe(getViewLifecycleOwner(), new Observer<List<Book>>() {
             @Override
-            public void onChanged(@Nullable List<Logbook> logbook) {
-                Log.d("LOOK", "it happened");
-                adapter.submitList(logbook);
+            public void onChanged(@Nullable List<Book> book) {
+                adapter.submitList(book);
             }
         });
 
@@ -91,18 +97,21 @@ public class LogbookListFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
                 mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
+
                 Toast.makeText(getActivity(), "Log deleted", Toast.LENGTH_SHORT).show();
+
             }
         }).attachToRecyclerView(recyclerView);
 
-        adapter.setOnItemClickListener(new LogbookListAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new BookListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Logbook logbook) {
+            public void onItemClick(Book book) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("logbook_id", logbook.getId());
+                bundle.putInt("logbook_id", book.getId());
                 navController.navigate(R.id.action_logbookListFragment_to_logEntryListFragment, bundle);
-                Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -112,18 +121,7 @@ public class LogbookListFragment extends Fragment {
 
     public void save() {
 
-/*
-        AdiWriter writer = new AdiWriter();
-        writer.append("book name", true);
 
-        Adif3Record record = new Adif3Record();
-
-        for  (LOOP THROUGH ALL RECORDS ) {
-            writer.append(record);
-        }
-        writer.toString(); // -> to some output
-
-        */
     }
 
 

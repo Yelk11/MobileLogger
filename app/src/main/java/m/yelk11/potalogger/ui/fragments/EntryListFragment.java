@@ -1,5 +1,6 @@
 package m.yelk11.potalogger.ui.fragments;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -16,34 +17,45 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import m.yelk11.potalogger.R;
-import m.yelk11.potalogger.adapters.LogEntryListAdapter;
+import m.yelk11.potalogger.adapters.EntryListAdapter;
 import m.yelk11.potalogger.dbc.entity.Entry;
-import m.yelk11.potalogger.dbc.entity.Logbook;
-import m.yelk11.potalogger.dbc.entity.LogbookEntries;
-import m.yelk11.potalogger.ui.viewmodel.LogbookViewModel;
+import m.yelk11.potalogger.ui.viewmodel.EntryListViewModel;
 
-public class LogEntryListFragment extends Fragment {
+public class EntryListFragment extends Fragment {
 
-    private LogbookViewModel mViewModel;
+    private EntryListViewModel mViewModel;
     private NavController navController;
 
-    public static LogEntryListFragment newInstance() {
-        return new LogEntryListFragment();
+    public static EntryListFragment newInstance() {
+        return new EntryListFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.log_entry_list_fragment, container, false);
+        return inflater.inflate(R.layout.entry_list_fragment, container, false);
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                navController.navigate(R.id.action_logEntryListFragment_to_logbookListFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -57,9 +69,6 @@ public class LogEntryListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Log.d("LOOK", "Logbook id: " + Integer.toString(getArguments().getInt("logbook_id")));
-
                 Bundle bundle = new Bundle();
                 bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
                 navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment, bundle);
@@ -71,23 +80,25 @@ public class LogEntryListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(LogbookViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(EntryListViewModel.class);
 
 
-        final LogEntryListAdapter adapter = new LogEntryListAdapter();
+        final EntryListAdapter adapter = new EntryListAdapter();
 
         RecyclerView recyclerView = getView().findViewById(R.id.log_entry_list_recyclerview);
+
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
 
 
-
-        mViewModel.findEntriesForLogbook(getArguments().getInt("logbook_id")).observe(getActivity(), new Observer<List<Entry>>() {
+        mViewModel.getAllBookEntries(getArguments().getInt("logbook_id")).observe(getActivity(), new Observer<List<Entry>>() {
             @Override
             public void onChanged(@Nullable List<Entry> entries) {
                 adapter.submitList(entries);
+
             }
         });
 
@@ -107,7 +118,7 @@ public class LogEntryListFragment extends Fragment {
         }).attachToRecyclerView(recyclerView);
 
 
-        adapter.setOnItemClickListener(new LogEntryListAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new EntryListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Entry entries) {
 

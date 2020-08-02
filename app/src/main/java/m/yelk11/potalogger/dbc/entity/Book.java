@@ -11,7 +11,7 @@ import static androidx.room.ForeignKey.CASCADE;
 
 
 @Entity
-public class Logbook {
+public class Book {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -23,11 +23,11 @@ public class Logbook {
 
 
 
-    public Logbook() {
+    public Book() {
 
     }
 
-    public Logbook(String title, String callsign) {
+    public Book(String title, String callsign) {
         super();
         this.title = title;
         this.callsign = callsign;

@@ -10,22 +10,17 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.dbc.entity.Entry;
 
-public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.EntryHolder> {
+public class EntryListAdapter extends ListAdapter<Entry, EntryListAdapter.EntryHolder> {
 
     private OnItemClickListener listener;
 
 
 
-    public LogEntryListAdapter() {
+    public EntryListAdapter() {
         super(DIFF_CALLBACK);
-
-
     }
     private static final DiffUtil.ItemCallback<Entry> DIFF_CALLBACK = new DiffUtil.ItemCallback<Entry>() {
         @Override
@@ -39,13 +34,13 @@ public class LogEntryListAdapter extends ListAdapter<Entry, LogEntryListAdapter.
     };
     @NonNull
     @Override
-    public LogEntryListAdapter.EntryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EntryListAdapter.EntryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.entry_list_item, parent, false);
-        return new LogEntryListAdapter.EntryHolder(itemView);
+        return new EntryListAdapter.EntryHolder(itemView);
     }
     @Override
-    public void onBindViewHolder(@NonNull LogEntryListAdapter.EntryHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EntryListAdapter.EntryHolder holder, int position) {
 
         Entry currentEntry = getItem(position);
         holder.callsign.setText(currentEntry.getmCallsignTx());
