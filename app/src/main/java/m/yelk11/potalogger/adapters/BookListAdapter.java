@@ -1,11 +1,15 @@
 package m.yelk11.potalogger.adapters;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,9 +22,10 @@ import m.yelk11.potalogger.dbc.entity.Book;
 public class BookListAdapter extends ListAdapter<Book, BookListAdapter.LogbookHolder> {
 
     private OnItemClickListener listener;
-
-    public BookListAdapter() {
+    private Context context;
+    public BookListAdapter(Context context) {
         super(DIFF_CALLBACK);
+        this.context = context;
     }
     private static final DiffUtil.ItemCallback<Book> DIFF_CALLBACK = new DiffUtil.ItemCallback<Book>() {
         @Override
@@ -45,6 +50,12 @@ public class BookListAdapter extends ListAdapter<Book, BookListAdapter.LogbookHo
     public void onBindViewHolder(@NonNull LogbookHolder holder, int position) {
         Book currentBook = getItem(position);
         holder.title.setText(currentBook.getTitle());
+        if(position % 2 == 0){
+            holder.layout.setBackgroundResource(R.color.bookPrimary);
+
+        }else{
+            holder.layout.setBackgroundResource(R.color.bookSecondary);
+        }
     }
 
     public Book getNoteAt(int position) {
@@ -56,13 +67,13 @@ public class BookListAdapter extends ListAdapter<Book, BookListAdapter.LogbookHo
 
     class LogbookHolder extends RecyclerView.ViewHolder {
         private TextView title;
-
+        private ConstraintLayout layout;
 
         public LogbookHolder(View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.rowTextView);
-
+            layout = itemView.findViewById(R.id.logbook_list_item_constraintlayout);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

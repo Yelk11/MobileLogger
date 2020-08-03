@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "caf35af05fde16c1a2baf482e29f2bf9",
+    "identityHash": "5a3f4be6831395186aad76cbcf961f17",
     "entities": [
       {
         "tableName": "Book",
@@ -38,7 +38,7 @@
       },
       {
         "tableName": "Entry",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `logbookId` INTEGER NOT NULL, `mDate` TEXT, `mTime` TEXT, `mFrequency` TEXT, `mMode` TEXT, `mCallsignTx` TEXT, `mCallsignRx` TEXT, `mPowerReportTx` TEXT, `mPowerReportRx` TEXT, `mSignalReportTx` TEXT, `mSignalReportRx` TEXT, `mGridsquareTx` TEXT, `mGridsquareRx` TEXT, `mCommentTx` TEXT, `mCommentRx` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `logbookId` INTEGER NOT NULL, `mDate` TEXT, `mTime` TEXT, `mFrequency` TEXT, `mMode` TEXT, `mBand` TEXT, `mCallsignTx` TEXT, `mCallsignRx` TEXT, `mPowerReportTx` TEXT, `mPowerReportRx` TEXT, `mSignalReportTx` TEXT, `mSignalReportRx` TEXT, `mGridsquareTx` TEXT, `mGridsquareRx` TEXT, `mCommentTx` TEXT, `mCommentRx` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -73,6 +73,12 @@
           {
             "fieldPath": "mMode",
             "columnName": "mMode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mBand",
+            "columnName": "mBand",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -150,7 +156,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'caf35af05fde16c1a2baf482e29f2bf9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5a3f4be6831395186aad76cbcf961f17')"
     ]
   }
 }

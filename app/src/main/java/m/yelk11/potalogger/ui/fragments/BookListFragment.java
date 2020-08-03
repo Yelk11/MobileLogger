@@ -69,7 +69,7 @@ public class BookListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final BookListAdapter adapter = new BookListAdapter();
+        final BookListAdapter adapter = new BookListAdapter(getContext());
 
         RecyclerView recyclerView = getView().findViewById(R.id.logbook_list);
 

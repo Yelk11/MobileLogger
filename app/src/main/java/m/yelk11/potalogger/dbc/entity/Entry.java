@@ -25,6 +25,7 @@ public class Entry {
     public String mTime;
     public String mFrequency;
     public String mMode;
+    public String mBand;
     public String mCallsignTx;
     public String mCallsignRx;
     public String mPowerReportTx;
@@ -107,6 +108,14 @@ public class Entry {
 
     public void setmMode(String mMode) {
         this.mMode = mMode;
+    }
+
+    public String getmBand() {
+        return mBand;
+    }
+
+    public void setmBand(String mBand) {
+        this.mBand = mBand;
     }
 
     public String getmCallsignTx() {

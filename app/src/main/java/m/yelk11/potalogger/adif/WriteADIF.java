@@ -1,8 +1,9 @@
 package m.yelk11.potalogger.adif;
 
 import android.app.Application;
+import android.os.Build;
 
-import androidx.lifecycle.LiveData;
+import androidx.annotation.RequiresApi;
 
 import org.marsik.ham.adif.AdiWriter;
 import org.marsik.ham.adif.Adif3Record;
@@ -40,6 +41,7 @@ public class WriteADIF {
 
         return entryRepository.getBookEntries(book.getId()).getValue();
     }
+
 
     public Adif3Record convertToRecord(Entry entry){
         Adif3Record record = new Adif3Record();

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:backgroundTint="@color/colorAccent">
+    android:id="@+id/logbook_list_item_constraintlayout">
 
     <TextView
         android:id="@+id/rowTextView"

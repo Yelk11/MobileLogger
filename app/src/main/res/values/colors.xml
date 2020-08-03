@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#E3F2FD</color>
+    <color name="colorPrimary">#0091EA</color>
     <color name="textPrimary">#000000</color>
 
-    <color name="colorSecondary">#2196F3</color>
+    <color name="colorSecondary">#0D47A1</color>
     <color name="textSecondary">#000000</color>
 
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#d0d2ff</color>
 
+    <color name="bookPrimary">#EEEEEE</color>
+    <color name="bookSecondary">#FFFFFF</color>
+    <color name="booklistText">#000000</color>
 
+    <color name="entryPrimary">#EEEEEE</color>
+    <color name="entrySecondary">#FFFFFF</color>
+    <color name="entrylistText">#FFFFFF</color>
 
 </resources>

@@ -83,7 +83,7 @@ public class EntryListFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(EntryListViewModel.class);
 
 
-        final EntryListAdapter adapter = new EntryListAdapter();
+        final EntryListAdapter adapter = new EntryListAdapter(getContext());
 
         RecyclerView recyclerView = getView().findViewById(R.id.log_entry_list_recyclerview);
 
