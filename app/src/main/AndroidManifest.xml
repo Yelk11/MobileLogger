@@ -17,9 +17,11 @@
             </intent-filter>
         </activity>
 
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="m.yelk11.potalogger"
+            android:authorities="m.yelk11.potalogger.fileprovider"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data

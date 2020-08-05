@@ -44,8 +44,11 @@ public interface EntryDao {
     @Query("DELETE FROM entry")
     void deleteAllEntries();
 
-
     @Transaction
     @Query("SELECT * FROM entry")
     LiveData<List<Entry>> getAllEntries();
+
+    @Transaction
+    @Query("SELECT * FROM entry WHERE logbookId = :logbookId")
+    List<Entry> getRawBookEntries(int logbookId);
 }

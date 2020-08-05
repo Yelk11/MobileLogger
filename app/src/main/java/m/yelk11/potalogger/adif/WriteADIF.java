@@ -1,6 +1,8 @@
 package m.yelk11.potalogger.adif;
 
 import android.app.Application;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -9,6 +11,10 @@ import org.marsik.ham.adif.AdiWriter;
 import org.marsik.ham.adif.Adif3Record;
 import org.marsik.ham.adif.enums.Mode;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,31 +22,33 @@ import m.yelk11.potalogger.dbc.entity.Book;
 import m.yelk11.potalogger.dbc.entity.Entry;
 import m.yelk11.potalogger.repository.EntryRepository;
 
+import static android.content.Context.MODE_PRIVATE;
+import static java.security.AccessController.getContext;
+
 public class WriteADIF {
-    EntryRepository entryRepository;
+    private EntryRepository entryRepository;
+    private Application application;
 
     public WriteADIF(Application application){
         entryRepository = new EntryRepository(application);
+        this.application = application;
     }
 
-    public void write(Book book){
+    public String write(Book book, List<Entry> entryList){
         AdiWriter writer = new AdiWriter();
-        List<Entry> bookEntries = getBookEntries(book);
+
         writer.append(book.getTitle(), true);
 
 
 
 
-        for  (int i = 0; bookEntries.size() > i; i++) {
-            writer.append(convertToRecord(bookEntries.get(i)));
+        for  (int i = 0; entryList.size() > i; i++) {
+            writer.append(convertToRecord(entryList.get(i)));
         }
-        writer.toString(); // -> to some output
+        return writer.toString(); // -> to some output
     }
 
-    public List<Entry> getBookEntries(Book book){
 
-        return entryRepository.getBookEntries(book.getId()).getValue();
-    }
 
 
     public Adif3Record convertToRecord(Entry entry){

@@ -23,7 +23,7 @@ public abstract class LogBookDatabase extends RoomDatabase {
     {
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
-            LogBookDatabase.class,"logbook_database")
+            LogBookDatabase.class,"test_database")
                     .fallbackToDestructiveMigration()
                     .build();
         }

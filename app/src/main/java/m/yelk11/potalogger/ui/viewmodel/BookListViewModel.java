@@ -9,17 +9,21 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import m.yelk11.potalogger.dbc.entity.Book;
+import m.yelk11.potalogger.dbc.entity.Entry;
 import m.yelk11.potalogger.repository.BookRepository;
+import m.yelk11.potalogger.repository.EntryRepository;
 
 public class BookListViewModel extends AndroidViewModel {
 
     private BookRepository bookRepository;
+    private EntryRepository entryRepository;
     private LiveData<List<Book>> allBooks;
 
 
     public BookListViewModel(@NonNull Application application) {
         super(application);
         this.bookRepository = new BookRepository(application);
+        this.entryRepository = new EntryRepository(application);
         allBooks = bookRepository.getAllBooks();
     }
 
@@ -37,6 +41,17 @@ public class BookListViewModel extends AndroidViewModel {
         bookRepository.deleteAllLogbooks();
     }
     public LiveData<List<Book>> getAllLogbooks() {
+
         return allBooks;
     }
+
+    public LiveData<List<Entry>> getBookEntries(int bookId){
+        return entryRepository.getBookEntries(bookId);
+    }
+
+    public void makeFile(Book book){
+        entryRepository.makeAdifFile(book);
+    }
+
+
 }
