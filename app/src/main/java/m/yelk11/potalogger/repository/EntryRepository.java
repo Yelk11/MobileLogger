@@ -22,6 +22,7 @@ import m.yelk11.potalogger.dbc.LogBookDatabase;
 import m.yelk11.potalogger.dbc.entity.Book;
 import m.yelk11.potalogger.dbc.entity.Entry;
 import m.yelk11.potalogger.interfaces.EntryDao;
+import m.yelk11.potalogger.repository.asynctask.MakeAdifFile;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -68,8 +69,11 @@ public class EntryRepository {
 
 
     public void makeAdifFile(Book book){
-        MakeAdifFile makeAdifFile = new MakeAdifFile(entryDao);
+
+        MakeAdifFile makeAdifFile = new MakeAdifFile(entryDao, application);
         makeAdifFile.execute(book);
+        AsyncTask.Status is = makeAdifFile.getStatus();
+
     }
 
 
@@ -135,24 +139,7 @@ public class EntryRepository {
 
     }
 
-    private class MakeAdifFile extends AsyncTask<Book, Void, Void> {
-        private EntryDao EntryDao;
-        private MakeAdifFile(EntryDao EntryDao) {
-            this.EntryDao = EntryDao;
-        }
 
-        @Override
-        protected Void doInBackground(Book... books) {
-
-            WriteADIF writeADIF = new WriteADIF(application);
-            List<Entry> entryList = EntryDao.getRawBookEntries(books[0].getId());
-            writeADIF.write(books[0], entryList);
-
-            return null;
-        }
-
-
-    }
 
 
 }

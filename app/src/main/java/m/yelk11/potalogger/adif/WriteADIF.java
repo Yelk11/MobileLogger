@@ -39,12 +39,10 @@ public class WriteADIF {
 
         writer.append(book.getTitle(), true);
 
-
-
-
         for  (int i = 0; entryList.size() > i; i++) {
             writer.append(convertToRecord(entryList.get(i)));
         }
+
         return writer.toString(); // -> to some output
     }
 
