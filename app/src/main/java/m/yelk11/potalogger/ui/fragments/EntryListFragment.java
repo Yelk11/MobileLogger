@@ -1,6 +1,8 @@
 package m.yelk11.potalogger.ui.fragments;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -14,7 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -27,6 +32,7 @@ import java.util.List;
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.adapters.EntryListAdapter;
 import m.yelk11.potalogger.dbc.entity.Entry;
+import m.yelk11.potalogger.ui.activities.MainActivity;
 import m.yelk11.potalogger.ui.viewmodel.EntryListViewModel;
 
 public class EntryListFragment extends Fragment {
@@ -57,10 +63,15 @@ public class EntryListFragment extends Fragment {
     }
 
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Toolbar myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+
+        ((MainActivity)getActivity()).setSupportActionBar(myToolbar);
 
 
         navController = Navigation.findNavController(view);

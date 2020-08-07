@@ -1,49 +1,45 @@
 package m.yelk11.potalogger.adif;
 
 import android.app.Application;
-import android.content.Context;
-import android.net.Uri;
-import android.os.Build;
 
-import androidx.annotation.RequiresApi;
 
 import org.marsik.ham.adif.AdiWriter;
 import org.marsik.ham.adif.Adif3Record;
-import org.marsik.ham.adif.enums.Mode;
+import org.marsik.ham.adif.AdifHeader;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.time.LocalDate;
 import java.util.List;
 
+import m.yelk11.potalogger.BuildConfig;
+
+import m.yelk11.potalogger.dbc.converter.EntryConverter;
 import m.yelk11.potalogger.dbc.entity.Book;
 import m.yelk11.potalogger.dbc.entity.Entry;
-import m.yelk11.potalogger.repository.EntryRepository;
 
-import static android.content.Context.MODE_PRIVATE;
-import static java.security.AccessController.getContext;
 
 public class WriteADIF {
-    private EntryRepository entryRepository;
-    private Application application;
+
+    Application application;
+    EntryConverter entryConverter;
 
     public WriteADIF(Application application){
-        entryRepository = new EntryRepository(application);
         this.application = application;
+        entryConverter = new EntryConverter();
     }
 
     public String write(Book book, List<Entry> entryList){
-        AdiWriter writer = new AdiWriter();
 
+
+        AdifHeader header = new AdifHeader();
+
+        AdiWriter writer = new AdiWriter();
+        writer.append(header);
         writer.append(book.getTitle(), true);
 
         for  (int i = 0; entryList.size() > i; i++) {
             writer.append(convertToRecord(entryList.get(i)));
         }
-
-        return writer.toString(); // -> to some output
+        AdifFormatter formatter = new AdifFormatter(writer.toString());
+        return formatter.getFormattedString();
     }
 
 
@@ -52,19 +48,19 @@ public class WriteADIF {
     public Adif3Record convertToRecord(Entry entry){
         Adif3Record record = new Adif3Record();
         //record.setTimeOn();
-        LocalDate localDate = LocalDate.parse(entry.getmDate());
-        record.setQsoDate(localDate);
+        //LocalDate localDate = LocalDate.parse(entry.getmDate());
+        //record.setQsoDate(localDate);
         record.setRstRcvd(entry.getmPowerReportRx());
         record.setRstSent(entry.getmPowerReportTx());
-        record.setMode(Mode.valueOf(entry.getmMode()));
+        //record.setMode(Mode.valueOf(entry.getmMode()));
         record.setMyGridSquare(entry.getmGridsquareTx());
         record.setGridsquare(entry.getmGridsquareRx());
-        record.setFreq(Double.valueOf(entry.getmFrequency()));
+        //record.setFreq(Double.valueOf(entry.getmFrequency()));
         record.setComment(entry.getmCommentRx());
         //record.setOperator();
         record.setCall(entry.getmCallsignTx());
         record.setContactedOp(entry.getmCallsignRx());
-
+        //record.setBand(entry.getmBand());
         return record;
     }
 
