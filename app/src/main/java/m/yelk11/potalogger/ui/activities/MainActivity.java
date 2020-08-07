@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
+        //setSupportActionBar(myToolbar);
 
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.entry_list_fragment_menu, menu);
+        menuInflater.inflate(R.menu.main_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
