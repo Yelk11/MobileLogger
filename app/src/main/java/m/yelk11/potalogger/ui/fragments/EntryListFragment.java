@@ -73,10 +73,10 @@ public class EntryListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toolbar myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
 
-        ((MainActivity)getActivity()).setSupportActionBar(myToolbar);
+
+
 
 
         navController = Navigation.findNavController(view);

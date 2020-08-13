@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PotaLogger</string>
+    <string name="app_name">Mobile Logger</string>
     <string name="new_log_book_name">Logbook Name</string>
     <string name="new_log_book_callsign">Logbook owner Callsign</string>
     <string name="new_log_book_gridsquare">Gridsquare</string>

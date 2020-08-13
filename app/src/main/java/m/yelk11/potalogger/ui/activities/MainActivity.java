@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        //Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(myToolbar);
-
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.toolbar);
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 

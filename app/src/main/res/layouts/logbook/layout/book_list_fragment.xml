@@ -7,15 +7,12 @@
     tools:context=".ui.fragments.EntryListFragment">
 
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/logbook_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"/>
+        android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/new_logbook_fab"
