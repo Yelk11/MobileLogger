@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    android:id="@+id/toolbar"
+    android:id="@+id/toolbar_taco"
     app:title="Mobile Logger tacos"
 
     android:background="@color/colorPrimary"

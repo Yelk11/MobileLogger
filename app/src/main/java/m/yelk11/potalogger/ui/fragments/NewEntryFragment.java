@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,6 +35,8 @@ public class NewEntryFragment extends Fragment {
         return inflater.inflate(R.layout.log_entry_fragment, container, false);
     }
 
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -49,6 +52,8 @@ public class NewEntryFragment extends Fragment {
         EditText gridsquareRx = getView().findViewById(R.id.entry_gridsquare_rx);
         EditText gridsquareTx = getView().findViewById(R.id.entry_gridsquare_tx);
 
+        TextView textView = getActivity().findViewById(R.id.toolbar_title);
+        textView.setText(R.string.NewEntryFragmentName);
 
         navController = Navigation.findNavController(view);
 

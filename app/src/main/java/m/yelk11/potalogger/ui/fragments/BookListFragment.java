@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -56,6 +57,8 @@ public class BookListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        TextView textView = getActivity().findViewById(R.id.toolbar_title);
+        textView.setText(R.string.BookListFragmentName);
 
         navController = Navigation.findNavController(view);
 

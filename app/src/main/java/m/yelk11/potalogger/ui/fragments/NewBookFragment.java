@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +37,8 @@ public class NewBookFragment extends Fragment {
         return inflater.inflate(R.layout.new_logbook_fragment, container, false);
     }
 
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -45,6 +48,10 @@ public class NewBookFragment extends Fragment {
 
         EditText ownerCallsign = getView().findViewById(R.id.new_book_edit_callsign);
         EditText logbookName = getView().findViewById(R.id.new_book_name);
+
+        TextView textView = getActivity().findViewById(R.id.toolbar_title);
+        textView.setText(R.string.NewLogbookFragmentName);
+
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
