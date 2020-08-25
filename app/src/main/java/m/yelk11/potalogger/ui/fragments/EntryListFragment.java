@@ -1,10 +1,16 @@
 package m.yelk11.potalogger.ui.fragments;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,25 +21,28 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
 import java.util.List;
 
+import m.yelk11.potalogger.BuildConfig;
 import m.yelk11.potalogger.R;
 import m.yelk11.potalogger.adapters.EntryListAdapter;
 import m.yelk11.potalogger.dbc.entity.Entry;
-import m.yelk11.potalogger.ui.activities.MainActivity;
 import m.yelk11.potalogger.ui.viewmodel.EntryListViewModel;
+
+import static androidx.core.content.FileProvider.getUriForFile;
 
 public class EntryListFragment extends Fragment {
 
@@ -53,6 +62,9 @@ public class EntryListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -62,21 +74,11 @@ public class EntryListFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        MenuInflater menuInflater = getActivity().getMenuInflater();
-        menuInflater.inflate(R.menu.entry_list_fragment_menu, menu);
-    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-
-
-
 
 
         navController = Navigation.findNavController(view);
@@ -148,6 +150,47 @@ public class EntryListFragment extends Fragment {
         });
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
 
+            case R.id.action_share:
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+
+                File file = new File(getActivity().getApplication()
+                        .getApplicationContext().getFilesDir(), "logbooks/");
+                File filePath = new File(file, "other.txt");
+
+
+                Uri uri = FileProvider.getUriForFile(getActivity().getApplication()
+                        .getApplicationContext(),  "m.yelk11.potalogger.provider",
+                        filePath);
+
+
+
+
+
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+
+                intent.setData(uri);
+                startActivity(Intent.createChooser(intent, "Share"));
+                return true;
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        inflater.inflate(R.menu.booklist_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
 }

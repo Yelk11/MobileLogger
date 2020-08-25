@@ -21,7 +21,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="m.yelk11.potalogger.fileprovider"
+            android:authorities="m.yelk11.potalogger.provider"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data

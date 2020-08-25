@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -38,7 +40,7 @@ public class NewBookFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button submitBtn = view.findViewById(R.id.submit_new_logbook);
+        FloatingActionButton submitBtn = view.findViewById(R.id.submit_new_logbook);
         NavController navController = Navigation.findNavController(view);
 
         EditText ownerCallsign = getView().findViewById(R.id.new_book_edit_callsign);
@@ -50,7 +52,7 @@ public class NewBookFragment extends Fragment {
                 String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                 mViewModel.insert(new Book(logbookName.getText().toString(),ownerCallsign.getText().toString()));
 
-                navController.navigate(R.id.action_newLogbookFragment_to_logbookListFragment);
+                navController.navigate(R.id.action_newLogbookFragment_to_logEntryListFragment);
             }
         });
 

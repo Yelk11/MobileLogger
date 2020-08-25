@@ -29,9 +29,6 @@
             android:id="@+id/action_logbookListFragment_to_newLogbookFragment"
             app:destination="@id/newLogbookFragment" />
         <action
-            android:id="@+id/action_logbookListFragment_to_logbookSettings"
-            app:destination="@id/logbookSettings" />
-        <action
             android:id="@+id/action_logbookListFragment_to_logEntryListFragment"
             app:destination="@id/logEntryListFragment" />
     </fragment>
@@ -41,8 +38,10 @@
         android:label="NewLogbookFragment"
         tools:layout="@layout/new_logbook_fragment">
         <action
-            android:id="@+id/action_newLogbookFragment_to_logbookListFragment"
-            app:destination="@id/logbookListFragment" />
+            android:id="@+id/action_newLogbookFragment_to_logEntryListFragment"
+            app:destination="@id/logEntryListFragment"
+            app:popUpTo="@id/logbookListFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/logEntryFragment"
@@ -51,14 +50,11 @@
         tools:layout="@layout/log_entry_fragment">
         <action
             android:id="@+id/action_logEntryFragment_to_logEntryListFragment"
-            app:destination="@id/logEntryListFragment" />
+            app:destination="@id/logEntryListFragment"
+            app:popUpTo="@id/logEntryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/logbookSettings"
         android:name="m.yelk11.potalogger.ui.fragments.LogbookSettings"
-        android:label="LogbookSettings">
-        <action
-            android:id="@+id/action_logbookSettings_to_logbookListFragment"
-            app:destination="@id/logbookListFragment" />
-    </fragment>
+        android:label="LogbookSettings"/>
 </navigation>

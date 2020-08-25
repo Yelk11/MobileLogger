@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -22,7 +23,7 @@ import m.yelk11.potalogger.ui.activities.MainActivity;
 public class MakeAdifFile extends AsyncTask<Book, Void, Void> {
     private EntryDao EntryDao;
     private Application application;
-
+    private static final String TAG = "MakeAdifFile";
 
     public MakeAdifFile(EntryDao EntryDao, Application application) {
         this.application = application;
@@ -31,21 +32,30 @@ public class MakeAdifFile extends AsyncTask<Book, Void, Void> {
 
     @Override
     protected Void doInBackground(Book... books) {
-        Log.d("LOOK", "JustStarted");
+        Log.d(TAG, "JustStarted");
         WriteADIF writeADIF = new WriteADIF(application);
         List<Entry> entryList = EntryDao.getRawBookEntries(books[0].getId());
         String str = writeADIF.write(books[0], entryList);
-        Log.d("LOOK", str);
+        Log.d(TAG, str);
+        File path = new File(application.getApplicationContext().getFilesDir(), "/logbooks");
+
+        if(!path.exists()){
+            path.mkdirs();
+        }
+
+        File file = new File(path,"other.txt");
 
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
-                    application.openFileOutput("MyAdif.txt", Context.MODE_PRIVATE));
+            FileOutputStream fos = new FileOutputStream(file);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fos);
+//                    application.openFileOutput("test.adi", Context.MODE_PRIVATE)); //TODO: change file name to fit the book name
+
             outputStreamWriter.write(str);
 
             outputStreamWriter.close();
         }
         catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
+            Log.e(TAG, "File write failed: " + e.toString());
             e.printStackTrace();
         }
 
@@ -61,6 +71,6 @@ public class MakeAdifFile extends AsyncTask<Book, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        Log.d("LOOK", "AllDone");
+        Log.d("", "AllDone");
     }
 }

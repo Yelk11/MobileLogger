@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/toolbar"
-    app:title="Mobile Logger"
+    app:title="Mobile Logger tacos"
 
     android:background="@color/colorPrimary"
     android:elevation="4dp"
