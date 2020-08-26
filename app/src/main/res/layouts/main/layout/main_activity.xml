@@ -10,25 +10,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout="@layout/toolbar"
-
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Test"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:gravity="center"
-            />
-    </androidx.appcompat.widget.Toolbar>
-
-
+        android:layout_width="match_parent" />
 
     <fragment
         android:id="@+id/nav_host_fragment"

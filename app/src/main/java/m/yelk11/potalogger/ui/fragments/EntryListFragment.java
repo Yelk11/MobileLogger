@@ -29,7 +29,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -66,7 +65,6 @@ public class EntryListFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -81,8 +79,7 @@ public class EntryListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView textView = getActivity().findViewById(R.id.toolbar_title);
-        textView.setText(R.string.EntryListFragmentName);
+
 
         navController = Navigation.findNavController(view);
 
@@ -171,6 +168,10 @@ public class EntryListFragment extends Fragment {
                 Uri uri = FileProvider.getUriForFile(getActivity().getApplication()
                         .getApplicationContext(),  "m.yelk11.potalogger.provider",
                         filePath);
+
+
+
+
 
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_STREAM, uri);
