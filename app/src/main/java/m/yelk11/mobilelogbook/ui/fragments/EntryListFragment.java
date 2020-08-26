@@ -154,7 +154,7 @@ public class EntryListFragment extends Fragment {
             case R.id.action_share:
 
                 // Create logbook ADI File
-                mViewModel.makeFile();
+                //mViewModel.makeFile();
 
                 // Share the logbook
                 Intent intent = new Intent(Intent.ACTION_SEND);
