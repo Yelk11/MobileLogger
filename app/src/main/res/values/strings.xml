@@ -8,4 +8,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="click_the_add_button_to_add_a_new_logbook_entry">Click the add button to add a new Logbook entry</string>
     <string name="share">Share</string>
+    <string name="new_entry_frag_title">Entry</string>
+    <string name="new_book_frag_title">Create Logbook</string>
+    <string name="book_list_frag_title">Logbooks</string>
+    <string name="entry_list_frag_title">EntryList</string>
+    <string name="chooser_title">Share Logbook</string>
 </resources>

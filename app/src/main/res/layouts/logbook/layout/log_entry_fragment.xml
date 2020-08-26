@@ -61,17 +61,18 @@
                     android:id="@+id/entry_date"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:ems="10"
+                    android:ems="8"
                     android:inputType="date"
-                    android:text="date" />
+                    android:hint="DATE"/>
+
 
                 <EditText
                     android:id="@+id/entry_time"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:ems="10"
+                    android:ems="8"
                     android:inputType="time"
-                    android:text="time" />
+                    android:hint="TIME" />
             </TableRow>
 
             <TableRow
@@ -99,9 +100,8 @@
                     android:id="@+id/entry_freq"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     android:inputType="textPersonName"
-                    android:text="Freq" />
+                    android:hint="FREQUENCY"/>
 
                 <EditText
                     android:id="@+id/entry_mode"
@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
 
                     android:inputType="textPersonName"
-                    android:text="Mode" />
+                    android:hint="MODE" />
             </TableRow>
 
 
@@ -133,17 +133,17 @@
                     android:id="@+id/entry_callsign_tx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="@integer/ems"
                     android:inputType="textPersonName"
-                    android:text="Callsign_tx" />
+                    android:hint="CALLSIGN TX" />
 
                 <EditText
                     android:id="@+id/entry_callsign_rx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="@integer/ems"
                     android:inputType="textPersonName"
-                    android:text="Callsign rx" />
+                    android:hint="CALLSIGN RX" />
             </TableRow>
 
             <TableRow
@@ -165,17 +165,17 @@
                     android:id="@+id/entry_power_tx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="@integer/ems"
                     android:inputType="textPersonName"
-                    android:text="Power tx" />
+                    android:hint="POWER TX" />
 
                 <EditText
                     android:id="@+id/entry_power_rx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="@integer/ems"
                     android:inputType="textPersonName"
-                    android:text="Power rx" />
+                    android:hint="POWER RX" />
             </TableRow>
 
             <TableRow
@@ -198,17 +198,17 @@
                     android:id="@+id/entry_signal_tx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="@integer/ems"
                     android:inputType="textPersonName"
-                    android:text="Signal tx" />
+                    android:hint="SIGNAL TX" />
 
                 <EditText
                     android:id="@+id/entry_signal_rx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="@integer/ems"
                     android:inputType="textPersonName"
-                    android:text="signal rx" />
+                    android:hint="SIGNAL RX" />
             </TableRow>
 
             <TableRow
@@ -230,17 +230,17 @@
                     android:id="@+id/entry_gridsquare_tx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="@integer/ems"
                     android:inputType="textPersonName"
-                    android:text="gridsquare tx" />
+                    android:hint="GRIDSQUARE TX"/>
 
                 <EditText
                     android:id="@+id/entry_gridsquare_rx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="@integer/ems"
                     android:inputType="textPersonName"
-                    android:text="gridsquare rx" />
+                    android:hint="GRIDSQUARE RX" />
             </TableRow>
         </TableLayout>
     </ScrollView>

@@ -11,7 +11,19 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        app:title=" "
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test"
+            style="@style/TextAppearance.AppCompat.Title"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -21,4 +33,9 @@
         app:defaultNavHost="true"
         android:layout_below="@id/toolbar"
         app:navGraph="@navigation/navigation" />
+    <View
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/drop_shadow"/>
 </RelativeLayout>

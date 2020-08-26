@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="m.yelk11.potalogger">
+    package="m.yelk11.mobilelogbook">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.MainActivity">
+        <activity android:name="m.yelk11.mobilelogbook.ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +21,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="m.yelk11.potalogger.provider"
+            android:authorities="m.yelk11.mobilelogbook.provider"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data
