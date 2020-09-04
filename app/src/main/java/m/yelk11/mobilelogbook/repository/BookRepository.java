@@ -1,6 +1,7 @@
 package m.yelk11.mobilelogbook.repository;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 
@@ -23,8 +24,6 @@ public class BookRepository {
         bookDao = db.bookDao();
     }
 
-
-
     public int insert(Book book) {
         InsertLogbookAsyncTask insertLogbookAsyncTask = new InsertLogbookAsyncTask(bookDao);
         insertLogbookAsyncTask.execute(book);
@@ -45,6 +44,9 @@ public class BookRepository {
     }
     public void deleteAllLogbooks() {
         new DeleteAllLogbooksAsyncTask(bookDao).execute();
+    }
+    public LiveData<Book> getLastBook() {
+        return bookDao.getLastBook();
     }
 
     public LiveData<List<Book>> getAllBooks() {

@@ -20,4 +20,7 @@ public class NewEntryViewModel extends AndroidViewModel {
     public void insert(Entry entry) {
         entryRepository.insert(entry);
     }
+    public void update(Entry entry) {
+        entryRepository.update(entry);
+    }
 }

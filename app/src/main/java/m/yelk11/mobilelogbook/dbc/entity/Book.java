@@ -10,12 +10,8 @@ public class Book {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-
     private String title;
     private String callsign;
-
-
-
 
     public Book() {
 

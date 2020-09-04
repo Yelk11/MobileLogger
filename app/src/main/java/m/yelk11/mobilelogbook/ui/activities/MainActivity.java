@@ -8,13 +8,14 @@ import androidx.navigation.Navigation;
 import android.os.Bundle;
 
 import m.yelk11.mobilelogbook.R;
-
+import m.yelk11.mobilelogbook.dbc.entity.Book;
 
 
 public class MainActivity extends AppCompatActivity {
 
 
     private NavController navController;
+    private Book curentBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
         navController.navigateUp();
         return super.onSupportNavigateUp();
+    }
+
+    public Book getCurrentBook(){
+        return new Book();
+    }
+    public void setCurrentBook(Book newBook){
+        this.curentBook = newBook;
     }
 
 }

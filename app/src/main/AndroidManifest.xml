@@ -21,7 +21,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="m.yelk11.mobilelogbook.provider"
+            android:authorities="${applicationId}.provider"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data

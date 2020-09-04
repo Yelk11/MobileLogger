@@ -12,13 +12,13 @@
         android:id="@+id/log_entry_submitbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/colorSecondary"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_24px"
-        android:backgroundTint="@color/colorSecondary"/>
+        app:srcCompat="@drawable/ic_add_24px" />
 
     <ScrollView
         android:id="@+id/scrollView2"

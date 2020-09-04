@@ -1,6 +1,7 @@
 package m.yelk11.mobilelogbook.repository;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
@@ -24,7 +25,6 @@ public class EntryRepository {
         LogBookDatabase db = LogBookDatabase.getInstance(application);
         this.application = application;
         entryDao = db.entryDao();
-
     }
 
     public void insert(Entry entry) {

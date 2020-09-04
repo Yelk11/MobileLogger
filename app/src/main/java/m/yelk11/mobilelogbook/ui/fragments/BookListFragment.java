@@ -1,9 +1,13 @@
 package m.yelk11.mobilelogbook.ui.fragments;
 
 
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,9 +27,10 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-
+import java.io.File;
 import java.util.List;
 
+import m.yelk11.mobilelogbook.BuildConfig;
 import m.yelk11.mobilelogbook.R;
 import m.yelk11.mobilelogbook.adapters.BookListAdapter;
 import m.yelk11.mobilelogbook.dbc.entity.Book;
@@ -60,6 +65,7 @@ public class BookListFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
+
         FloatingActionButton fab = view.findViewById(R.id.new_logbook_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,12 +76,11 @@ public class BookListFragment extends Fragment {
     }
 
 
-
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onResume() {
+        super.onResume();
 
-        // Set up Book Adapter
+
         final BookListAdapter adapter = new BookListAdapter(getContext());
 
         RecyclerView recyclerView = getView().findViewById(R.id.logbook_list);
@@ -84,7 +89,7 @@ public class BookListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
-        mViewModel = ViewModelProviders.of(this).get(BookListViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(BookListViewModel.class);
         mViewModel.getAllLogbooks().observe(getViewLifecycleOwner(), new Observer<List<Book>>() {
             @Override
             public void onChanged(@Nullable List<Book> book) {
@@ -102,9 +107,12 @@ public class BookListFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                Book book = adapter.getNoteAt(viewHolder.getAdapterPosition());
-                mViewModel.makeFile(book);
-
+                if(direction == ItemTouchHelper.LEFT){
+                    Book book = adapter.getNoteAt(viewHolder.getAdapterPosition());
+                    mViewModel.makeFile(book);
+                }else if(direction == ItemTouchHelper.RIGHT){
+                    mViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
+                }
             }
         }).attachToRecyclerView(recyclerView);
 
@@ -118,6 +126,9 @@ public class BookListFragment extends Fragment {
             }
         });
 
-    }
 
+
+
+
+    }
 }

@@ -1,5 +1,6 @@
 package m.yelk11.mobilelogbook.ui.fragments;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -60,21 +61,42 @@ public class NewEntryFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Entry entry = new Entry();
-                entry.setLogbookId(getArguments().getInt("logbook_id"));
-                entry.setmDate(date.getText().toString());
-                entry.setmTime(time.getText().toString());
-                entry.setmFrequency(frequency.getText().toString());
-                entry.setmMode(mode.getText().toString());
-                entry.setmCallsignRx(callsignRx.getText().toString());
-                entry.setmCallsignTx(callsignTx.getText().toString());
-                entry.setmSignalReportRx(signalRx.getText().toString());
-                entry.setmSignalReportTx(signalTx.getText().toString());
-                entry.setmGridsquareRx(gridsquareRx.getText().toString());
-                entry.setmGridsquareTx(gridsquareTx.getText().toString());
+                int id = getArguments().getInt("entry_id");
+                if(id>=0){
+                    Entry entry = new Entry();
+                    entry.setLogbookId(getArguments().getInt("logbook_id"));
+                    entry.setId(id);
+                    entry.setmDate(date.getText().toString());
+                    entry.setmTime(time.getText().toString());
+                    entry.setmFrequency(frequency.getText().toString());
+                    entry.setmMode(mode.getText().toString());
+                    entry.setmCallsignRx(callsignRx.getText().toString());
+                    entry.setmCallsignTx(callsignTx.getText().toString());
+                    entry.setmSignalReportRx(signalRx.getText().toString());
+                    entry.setmSignalReportTx(signalTx.getText().toString());
+                    entry.setmGridsquareRx(gridsquareRx.getText().toString());
+                    entry.setmGridsquareTx(gridsquareTx.getText().toString());
 
 
-                mViewModel.insert(entry);
+                    mViewModel.update(entry);
+                }else{
+                    Entry entry = new Entry();
+                    entry.setLogbookId(getArguments().getInt("logbook_id"));
+                    entry.setmDate(date.getText().toString());
+                    entry.setmTime(time.getText().toString());
+                    entry.setmFrequency(frequency.getText().toString());
+                    entry.setmMode(mode.getText().toString());
+                    entry.setmCallsignRx(callsignRx.getText().toString());
+                    entry.setmCallsignTx(callsignTx.getText().toString());
+                    entry.setmSignalReportRx(signalRx.getText().toString());
+                    entry.setmSignalReportTx(signalTx.getText().toString());
+                    entry.setmGridsquareRx(gridsquareRx.getText().toString());
+                    entry.setmGridsquareTx(gridsquareTx.getText().toString());
+
+
+                    mViewModel.insert(entry);
+                }
+
 
                 Bundle bundle = new Bundle();
                 bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
@@ -87,7 +109,9 @@ public class NewEntryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(NewEntryViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(NewEntryViewModel.class);
     }
+
+
 
 }

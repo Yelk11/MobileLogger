@@ -3,7 +3,7 @@ package m.yelk11.mobilelogbook.ui.fragments;
 import androidx.activity.OnBackPressedCallback;
 import androidx.core.content.FileProvider;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +32,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.io.File;
 import java.util.List;
 
+import m.yelk11.mobilelogbook.BuildConfig;
 import m.yelk11.mobilelogbook.R;
 import m.yelk11.mobilelogbook.adapters.EntryListAdapter;
 import m.yelk11.mobilelogbook.dbc.entity.Entry;
@@ -74,6 +76,7 @@ public class EntryListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         TextView textView = getActivity().findViewById(R.id.toolbar_title);
         textView.setText(R.string.entry_list_frag_title);
 
@@ -86,6 +89,8 @@ public class EntryListFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
+                bundle.putInt("entry_id", -1);
+                Log.d("ENTRY_ID", "Entry List: " + -1);
                 navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment, bundle);
 
             }
@@ -95,13 +100,14 @@ public class EntryListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(EntryListViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(EntryListViewModel.class);
 
 
         final EntryListAdapter adapter = new EntryListAdapter(getContext());
 
         RecyclerView recyclerView = getView().findViewById(R.id.log_entry_list_recyclerview);
 
+        Log.d("BOOK_ID", "Entry List with Book Id: " + getArguments().getInt("logbook_id"));
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -139,10 +145,9 @@ public class EntryListFragment extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putInt("logbook_id", getArguments().getInt("logbook_id"));
+                bundle.putInt("entry_id", entries.getId());
+                Log.d("ENTRY_ID", "Entry List: " + entries.getId());
                 navController.navigate(R.id.action_logEntryListFragment_to_logEntryFragment, bundle);
-
-
-                Toast.makeText(getActivity(), "You clicked something", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -153,8 +158,7 @@ public class EntryListFragment extends Fragment {
 
             case R.id.action_share:
 
-                // Create logbook ADI File
-                //mViewModel.makeFile();
+
 
                 // Share the logbook
                 Intent intent = new Intent(Intent.ACTION_SEND);
@@ -167,7 +171,7 @@ public class EntryListFragment extends Fragment {
 
 
                 Uri uri = FileProvider.getUriForFile(getActivity().getApplication()
-                        .getApplicationContext(),  "m.yelk11.potalogger.provider",
+                        .getApplicationContext(),  BuildConfig.APPLICATION_ID +".provider",
                         filePath);
 
                 intent.setType("text/plain");
