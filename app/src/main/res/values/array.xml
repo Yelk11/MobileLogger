@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="radio_mode">
+        <item>SSB</item>
+        <item>CW</item>
+        <item>FT-8</item>
+    </string-array>
+</resources>
