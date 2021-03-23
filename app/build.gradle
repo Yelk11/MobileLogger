@@ -1,8 +1,6 @@
 apply plugin: 'com.android.application'
 
-def apikeyPropertiesFile = rootProject.file("apikey.properties")
-def apikeyProperties = new Properties()
-apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
 
 
 android {
@@ -15,8 +13,7 @@ android {
         versionName "1.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "ADSENSE_KEY", apikeyProperties['ADSENSE_KEY'])
-        buildConfigField("String", "FIREBASE_KEY", apikeyProperties['FIREBASE_KEY'])
+
 
         javaCompileOptions {
             annotationProcessorOptions {
